@@ -1,0 +1,40 @@
+.button {
+  display: block;
+  margin: auto;
+  transition: all 0.15s linear;
+  cursor: pointer;
+  border: 0;
+  border-radius: 10px;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  text-transform: capitalize;
+
+  &.button-md {
+    font-size: medium;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  &.button-lg {
+    font-size: large;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  &.button-xl {
+    font-size: larger;
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  &.button-primary {
+    box-shadow: 0px 0px 5px $primary-06;
+    background-color: $primary-06;
+    color: $secondary-02;
+    &:hover {
+      color: $secondary-01;
+      border-color: $primary-03;
+      background-color: $primary-05;
+    }
+  }
+}
