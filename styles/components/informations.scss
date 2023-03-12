@@ -1,0 +1,33 @@
+.page-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .page-item {
+    display: flex;
+    flex: 1 0 45%;
+    height: 150px;
+    font-family: 'Nova Cut';
+    margin: 15px;
+    text-align: center;
+    color: $grey-01;
+    transition: .1s border-radius linear, .2s background-color linear;
+    &:hover {
+      border-radius: 25px;
+      background-color: transparentize($primary-05, 0.2);
+      .title {
+        text-shadow: 0px 0px 10px black;
+        letter-spacing: 5px;
+      }
+    }
+    border: 2px solid $grey-01;
+    background-color: $primary-06;
+
+    .title {
+      text-shadow: 0px 0px 10px transparentize($grey-01, 1);
+      transition: .15s all linear;
+      display: block;
+      margin: auto;
+      font-size: 25pt;
+    }
+  }
+}

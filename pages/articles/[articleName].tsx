@@ -1,16 +1,10 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../../styles/Home.module.css'
-
-import Logo from '../../public/logo.svg'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-import Button from '../../components/app-components/Button/Button'
-import Link from 'next/link'
-import Map from '../../components/app-components/Map/Map'
 import { findArticle, getArticles, IArticleItem } from '../../lib/articles'
 import { addApolloState, initializeApollo } from '../../lib/appolo'
-import ArticleItem from '../../components/app-components/ArticleItem/ArticleItem'
+import Loader from '../../components/app-components/Loader/Loader'
+import { useState } from 'react'
+import clsx from 'clsx'
 
 
 //Initialize Apollo Client for SSR
@@ -21,12 +15,27 @@ type IArticlePage = {
 }
 
 export default function Article({article} : IArticlePage) {
+  const [headerOver, setHeaderOver] = useState(false)
+  const props = {
+    onMouseOver: () => setHeaderOver(true),
+    onMouseOut: () => setHeaderOver(false)
+  }
   return (
     <div>
-      <div className='section-container'>
-        <h1>{article?.title}</h1>
+      {!article && <Loader/>}
+      {article && <div className='section-container'>
+        <div className={clsx('article-header', headerOver && "hover" )} style={{backgroundImage: article?.featuredImage ? `url(${article.featuredImage.node.sourceUrl})` : ''}}>
+          <div {...props} className='article-header-background'/>
+          <div className='category-article-list'>
+            <div className='category-article-item'>
+              {article.categories.nodes.map(({name}) => name).join(' - ')}
+            </div>
+          </div>
+          <h1 {...props}>{article?.title}</h1>
+          <div {...props}>Le {new Date(article.date).toLocaleDateString()} par {article.author.node.name}</div>
+        </div>
         <div className="article-content" dangerouslySetInnerHTML={{ __html: article?.content ?? "" }} />
-      </div>
+      </div>}
     </div>
   )
 }

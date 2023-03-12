@@ -9,6 +9,10 @@
   font-weight: bold;
   text-transform: capitalize;
 
+  &.redirect-button {
+    text-transform: uppercase;
+    padding-bottom: 40px;
+  }
   &.button-md {
     font-size: medium;
     padding: 5px;

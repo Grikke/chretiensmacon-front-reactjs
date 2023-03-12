@@ -1,36 +1,36 @@
 import { GetStaticProps } from 'next'
 
-import Map from '../components/app-components/Map/Map'
 import { getArticles, IArticleItem } from '../lib/articles'
 import { addApolloState, initializeApollo } from '../lib/appolo'
-import ArticleItem from '../components/app-components/ArticleItem/ArticleItem'
 import {useState, useEffect} from 'react'
+import { getPages, IPageItem } from '../lib/informations'
+import Link from 'next/link'
 
-type IHomePage = {
-  articles: IArticleItem[]
+type IInformationPage = {
+  pages: IPageItem[]
 }
 
-export default function Home({articles} : IHomePage) {
+export default function InformationPage({pages} : IInformationPage) {
   const [hydrated, setHydrated] = useState(false);
+  console.log(pages)
     useEffect(() => {
-        setHydrated(true);
+      setHydrated(true);
     }, []);
     if (!hydrated) {
         // Returns null on first render, so the client and server match
         return null;
     }
-
-  console.log(articles)
   return (
     <div>
       <div className="section-container">
-        <h2>Paroisses Catholiques du Mâconnais</h2>
-        <Map/>
-      </div>
-      <div className="section-container">
-        <div className="articles-container">
-          {articles.map(article => (
-            <ArticleItem key={article.slug} article={article}/>
+        <h2>Informations</h2>
+        <div className="page-container">
+          {pages.map(({slug, title}) => (
+            <Link href={`/${slug}`} className="page-item">
+              <div className="title">
+                {title}
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -42,12 +42,12 @@ export const getStaticProps: GetStaticProps = async () => {
   try {
     //Initialize Apollo Client for SSR
     const client = initializeApollo()
-    const { data } = await client.query({ query: getArticles })
+    const { data } = await client.query({ query: getPages })
 
-    if (!data?.posts?.nodes)
+    if (!data?.pages?.nodes)
       return { notFound: true }
     return addApolloState(client, {
-      props: { pageType: 'homepage', articles: data?.posts?.nodes },
+      props: { pageType: 'infopage', pages: data?.pages?.nodes },
       revalidate: 30,
     })
   } catch (e) {

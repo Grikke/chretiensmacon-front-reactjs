@@ -27,7 +27,7 @@ export default function DefaultLayout({children}) {
               <a href="https://autun.catholique.fr/">Diocèse d'Autun</a>
             </button>
           </div>
-          <div>Vous n'êtes actuellement sur aucune paroisse</div>
+          <div>Pas de paroisse</div>
         </div>
       </div>
       <header>

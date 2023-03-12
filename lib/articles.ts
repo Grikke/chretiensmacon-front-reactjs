@@ -8,11 +8,21 @@ export type IArticleItem = {
       sourceUrl: string
     }
   },
+  categories: {
+    nodes: {
+      name: string
+      slug: string
+    }[]
+  }
   content?: string
   author: {
     node: {
       name: string
     }
+  },
+  acfPriorities: {
+    expirationDate?: string
+    headline?: boolean
   },
   date: string
   slug: string
@@ -20,8 +30,18 @@ export type IArticleItem = {
 
 export const getArticles = gql`
   query getArticles {
-    posts {
+    posts(first: 10000) {
       nodes {
+        acfPriorities {
+          expirationDate
+          headline
+        }
+        categories {
+          nodes {
+            name
+            slug
+          }
+        }
         title
         featuredImage {
           node {
@@ -46,6 +66,18 @@ export const findArticle = gql`
     post(id: $id, idType: SLUG) {
       content
       title
+      categories {
+        nodes {
+          name
+          slug
+        }
+      }
+      featuredImage {
+        node {
+          altText
+          sourceUrl
+        }
+      }
       author {
         node {
           name
