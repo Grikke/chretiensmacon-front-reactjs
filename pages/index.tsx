@@ -1,16 +1,13 @@
 import { GetStaticProps } from 'next'
 
 import Map from '../components/app-components/Map/Map'
-import { getArticles, IArticleItem } from '../lib/articles'
 import { addApolloState, initializeApollo } from '../lib/appolo'
-import ArticleItem from '../components/app-components/ArticleItem/ArticleItem'
 import {useState, useEffect} from 'react'
 
 type IHomePage = {
-  articles: IArticleItem[]
 }
 
-export default function Home({articles} : IHomePage) {
+export default function Home({} : IHomePage) {
   const [hydrated, setHydrated] = useState(false);
     useEffect(() => {
         setHydrated(true);
@@ -19,20 +16,11 @@ export default function Home({articles} : IHomePage) {
         // Returns null on first render, so the client and server match
         return null;
     }
-
-  console.log(articles)
   return (
     <div>
       <div className="section-container">
         <h2>Paroisses Catholiques du Mâconnais</h2>
         <Map/>
-      </div>
-      <div className="section-container">
-        <div className="articles-container">
-          {articles.map(article => (
-            <ArticleItem key={article.slug} article={article}/>
-          ))}
-        </div>
       </div>
     </div>
   )
@@ -42,12 +30,9 @@ export const getStaticProps: GetStaticProps = async () => {
   try {
     //Initialize Apollo Client for SSR
     const client = initializeApollo()
-    const { data } = await client.query({ query: getArticles })
 
-    if (!data?.posts?.nodes)
-      return { notFound: true }
     return addApolloState(client, {
-      props: { pageType: 'homepage', articles: data?.posts?.nodes },
+      props: { pageType: 'homepage' },
       revalidate: 30,
     })
   } catch (e) {

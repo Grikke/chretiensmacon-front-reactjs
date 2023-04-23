@@ -1,8 +1,10 @@
 import React, { MouseEventHandler } from 'react'
 
 const VineyardMap = ({
-  onClick
-}: {onClick: MouseEventHandler<SVGElement>}) => {
+  onClick,
+  active= false
+}: {onClick: MouseEventHandler<SVGElement>
+active: boolean}) => {
   return (<g className="parish-group-svg" onClick={onClick}>
     <path className="st11" d="M324.71,336.12c0.07,0.15,0.13,0.31,0.18,0.47c0.56,1.79,1.04,3.61,1.03,5.51c-0.01,1.52-0.79,2.77-1.94,3.54
       c0.03,0.04,0.06,0.08,0.09,0.12c0.64,0.99,0.69,2.24,0.44,3.35c-0.24,1.04-1.1,2.07-2,2.6c-0.99,0.58-2.25,0.72-3.35,0.44
@@ -248,6 +250,7 @@ const VineyardMap = ({
       l0.1,0.22l0.09,0.1l0.02,0.06l1.54,3.85l0.17,0.35l2.75,3.08l-0.21,0.17l-0.06,0.11l-0.04,0.45l-0.12,0.37l-0.31,0.63l-0.27,0.67
       l-0.18,0.35l-0.2,0.27l-0.83,0.96l-0.43,0.41l-0.43,0.28l-0.04,0.1l0.17,0.57l0.2,1.01l0.47,1.01l-0.08,0.4l0.09,0.45l-0.02,0.37
       l-0.04,0.06L241.8,336.46"/>
+    <text x="181.2" y="456.18" style={{opacity: !active ? 1 : 0, fontSize: active ? "22px" : "", transition: '.21s all linear'}} className='parish-title'>Notre Dame des Vignes</text>
   </g>)
 }
 

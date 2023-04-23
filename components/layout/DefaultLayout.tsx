@@ -1,14 +1,55 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import styles from '../../styles/Home.module.css'
-import Map from '../../public/map.svg'
+import { useAtom } from 'jotai'
+import { useMediaQuery } from 'react-responsive'
+import { parish } from '../../lib/atom'
 
 import Logo from '../../public/logo.svg'
+import LogoFull from '../../public/logo-full.svg'
 
-import Button from '../../components/app-components/Button/Button'
 import Link from 'next/link'
+import clsx from 'clsx'
+import { ReactNode, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import ParishList from '../../lib/parish'
 
-export default function DefaultLayout({children}) {
+export default function DefaultLayout({children} : {children: ReactNode}) {
+  const [activeParish, setActiveParish] = useAtom(parish)
+  const [showMenu, toggleMenu] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (localStorage.getItem('parish'))
+      setActiveParish(localStorage.getItem('parish'))
+    else 
+      router.push('/')
+  }, [])
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
+  useEffect(() => {
+    if (activeParish)
+      localStorage.setItem('parish', activeParish)
+  }, [activeParish])
+
+  const parishTarget: {[key: string] : {
+    title: string
+    img?: StaticImageData
+    description: string
+    button: {
+      title: string
+      event?: () => void
+    }
+  }} = ParishList
+  
+  const path: {[key: string]: string} = {
+    '/': 'Accueil',
+    '/actualites': 'Actualités',
+    '/sacrements': 'Sacrements',
+    '/informations': 'Informations',
+    '/horaires': 'Horaires'
+  }
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -27,47 +68,56 @@ export default function DefaultLayout({children}) {
               <a href="https://autun.catholique.fr/">Diocèse d'Autun</a>
             </button>
           </div>
-          <div>Pas de paroisse</div>
+          {activeParish ? <div><b>Paroisse - </b>{isMobile ? parishTarget?.[activeParish]?.title.replace('de Paul', '').trim() : parishTarget?.[activeParish]?.title}</div> :
+           <div>Pas de paroisse</div>}
         </div>
       </div>
-      <header>
-        <div className="header-container">
-          <div className="logo-container">
-            <Link href={'/'}>
-              <Image src={Logo} alt="Chrétiens Mâcon"/>
-            </Link>
-          </div>
-          <div className='nav-container'>
-            <div>
-              <Link className="nav-link" href={'/actualites'}>
-                Actualités
+      <header className={clsx(activeParish && "parish")} style={{backgroundImage: activeParish ?`url(
+        ${parishTarget?.[activeParish]?.img ? parishTarget?.[activeParish]?.img?.src : ""
+      })` : ''}}>
+        <div className="header-background">
+          <div className="header-container">
+            <div className="logo-container">
+              <Link href={'/'} className={clsx(!activeParish && "logo-full")}>
+                <Image src={activeParish ? Logo : LogoFull} alt="Chrétiens Mâcon"/>
               </Link>
             </div>
-            <div>
-              <Link className="nav-link" href={'/informations'}>
-                Informations
-              </Link>
-            </div>
-            <div>
-              <Link className="nav-link" href={'/horaires'}>
-                Horaires
-              </Link>
-            </div>
-            <div>
-              <Link className="nav-link" href={'/annuaire'}>
-                Annuaire
-              </Link>
-            </div>
+            {activeParish && <div className='menu-mobile-button' onClick={() => toggleMenu(!showMenu)} style={{textShadow: showMenu ? '0px 0px 5px white' : ''}}>
+              <div>Menu</div> <span style={{transform: `rotate(${90 * (showMenu ? 1 : -1)}deg)`}}>&#62;</span>
+            </div>}
+            {activeParish && <div className='nav-container'>
+              {Object.keys(path).map(val => (
+                <div key={val}>
+                  <Link className='nav-link' href={val}>
+                    {path[val]}
+                  </Link>
+                </div>
+              ))}
+            </div>}
           </div>
         </div>
       </header>
+      {activeParish && <div className='nav-mobile-container' style={{opacity: showMenu ? 1 : 0, pointerEvents: showMenu ? 'all' : 'none'}}>
+        {Object.keys(path).map(val => (
+          <div key={val}>
+            <Link onClick={() => toggleMenu(false)} className='nav-link' href={val}>
+              {path[val]}
+            </Link>
+          </div>
+        ))}
+      </div>}
 
       <main className="main-container">
         {children}
       </main>
 
       <footer className={styles.footer}>
+        <div className="footer-section">
           Développé par et pour le Mâconnais
+        </div>
+        <div className="footer-section">
+          Test
+        </div>
       </footer>
     </div>
   )

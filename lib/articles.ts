@@ -30,7 +30,7 @@ export type IArticleItem = {
 
 export const getArticles = gql`
   query getArticles {
-    posts(first: 10000) {
+    posts(first: 500) {
       nodes {
         acfPriorities {
           expirationDate

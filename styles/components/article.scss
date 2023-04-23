@@ -123,6 +123,33 @@
   }
 }
 
+.page-container {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  margin-left: 200px;
+  margin-right: 200px;
+  .page-button {
+    flex: 1;
+    .page-event-button {
+      cursor: pointer;
+      background-color: white;
+      width: 32px;
+      font-family: 'Montserrat Alternates';
+      color: $primary-06;
+      font-weight: bold;
+      border-radius: 10px;
+      border: 1px solid $primary-06;
+      text-align: center;
+      margin: auto;
+      transition: .1s all linear;
+      &:hover {
+        background-color: transparentize(white, 0.5);
+      }
+    }
+  }
+}
+
 .article-content {
   & img {
     border-radius: 10px;
@@ -150,7 +177,12 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
+  .page-container {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  
   .article-item {
     margin: 10px;
   }
@@ -175,5 +207,12 @@
   }
   .articles-container {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .page-container {
+    margin-left: 20px;
+    margin-right: 20px;
   }
 }

@@ -1,0 +1,133 @@
+
+.main-schedule {
+  border-bottom: 0.5px solid white;
+  padding-bottom: 0 !important;
+}
+
+.seasonal-schedule {
+  overflow-y: auto;
+  max-height: 60vh;
+  scrollbar-width: 0;
+  padding-bottom: 0 !important;
+}
+
+.schedule-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  .schedule-title {
+    font-family: 'Nova Cut';
+    text-align: center;
+    color: white;
+    padding-bottom: 10px;
+    font-size: 25px;
+    text-shadow: 0 0 5px black;
+  }
+  .schedule-description {
+    font-family: 'Montserrat';
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    white-space: pre-wrap;
+    text-shadow: 0 0 2px white;
+  }
+  .calendar-description {
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 12px;
+    color: black;
+    white-space: pre-wrap;
+    text-shadow: 0 0 1px black;
+  }
+  .calendar-schedule {
+    padding: 15px;
+    padding-right: 5px;
+    padding-left: 5px;
+    .day-item {
+      &.day-today {
+        border-top: 3px solid white;
+        border-left: 3px solid white;
+        border-bottom: 3px solid white;
+        border-right: 3px solid white;
+        .day-name {
+          font-weight: bold;
+          border-bottom: 3px solid white;
+        }
+        .day-detail {
+          font-weight: 600;
+        }
+      }
+      flex: 1;
+      border: 1px solid white;
+      border-right: 0;
+      background-color: transparentize($primary-03, 0.5);
+      .day-name {
+        padding: 5px;
+        border-bottom: 1px solid white;
+        background-color: transparentize($primary-06, 0.5);
+        text-align: center;
+        color: white;
+        font-family: 'Nova Cut';
+      }
+      .day-detail {
+        padding: 5px;
+        color: white;
+        pre {
+          white-space: pre-wrap;
+          font-family: 'Montserrat Alternates';
+        }
+      }
+    }
+    .calendar-week,.calendar-week-end {
+      display: flex;
+      flex-direction: row;
+    }
+    .calendar-week {
+        .day-item {
+          &:first-child {
+            .day-name {
+              border-top-left-radius: 5px;
+            }
+            border-top-left-radius: 5px;
+          }
+          &:last-child {
+            .day-name {
+            border-top-right-radius: 5px;
+            }
+            border-top-right-radius: 5px;
+            border-right: 1px solid white;
+        }
+      }
+    }
+    .calendar-week-end {
+      .day-item {
+        &:not(.day-today) {
+          border-top: 0;
+        }
+        &:first-child {
+          .day-detail {
+            border-bottom-left-radius: 5px;
+          }
+          border-bottom-left-radius: 5px;
+        }
+        &:last-child {
+          .day-detail {
+          border-bottom-right-radius: 5px;
+          }
+          border-bottom-right-radius: 5px;
+          border-right: 1px solid white;
+      }
+    }
+  }
+  }
+}
+
+@media (max-width: 1100px) {
+  .schedule-item {
+    .calendar-schedule {
+        .calendar-week {
+          flex-direction: column !important;
+        }
+    }
+  }
+}

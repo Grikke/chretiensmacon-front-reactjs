@@ -21,16 +21,18 @@ export default function ErrorPage({} : IErrorPage) {
   }, []);
   return (
     <div>
-      <div className="section-container">
-        <h2>Erreur 404</h2>
-        <div className="section-message">
-          {displayMessage}
+      <div className="section-container error-container">
+        <div>
+          <h2>Erreur 404</h2>
+          <div className="section-message">
+            {displayMessage}
+          </div>
+          <Button variant={"primary"} size={"lg"} className="redirect-button">
+            <Link href="/">
+              Revenir à l'Accueil
+            </Link>
+          </Button>
         </div>
-        <Button variant={"primary"} size={"lg"} className="redirect-button">
-          <Link href="/">
-            Revenir à l'Accueil
-          </Link>
-        </Button>
       </div>
     </div>
   )

@@ -1,8 +1,11 @@
+import clsx from 'clsx'
 import React, { MouseEventHandler } from 'react'
 
 const EstienneMap = ({
-  onClick
-}: {onClick: MouseEventHandler<SVGElement>}) => {
+  onClick,
+  active= false
+}:  {onClick: MouseEventHandler<SVGElement>
+  active: boolean} ) => {
   return (<g className="parish-group-svg" onClick={onClick}>
     <path id="path1737_1_" vector-effect="none" className="st6" d="M362.2,299.18l-0.07-0.15l-0.06-0.14l-0.07-0.12l-0.06-0.1l-0.09-0.14
       l-0.07-0.12l-0.14-0.19l-0.04-0.05l-0.04-0.05l0.05-0.05l0.04-0.03l0.12-0.07l0.13-0.07l0.09-0.05l0.18-0.07l0.12-0.04l0.17-0.06
@@ -251,6 +254,7 @@ const EstienneMap = ({
       423.93,181.75 423.87,181.41 423.81,181.26 423.78,181.23 423.04,181.02 422.63,180.86 422.25,180.76 421.68,180.54 421.24,180.3 
       420.7,179.98 420.43,179.99 419.49,179.02 417.23,176.76 417.12,176.75 416.63,176.27 416.16,175.68 414.47,174.03 413.69,173.22 
       413.2,172.72 412.54,172.03 412.06,171.59 410.88,170.7 410.7,170.54 410.36,170.1 409.82,169.56 409.21,168.82 	"/>
+      <text x="310.2" y="270.18" style={{opacity: !active ? 1 : 0, fontSize: active ? "22px" : "", transition: '.21s all linear'}} className='parish-title'>Saint Etienne</text>
   </g>)
 }
 

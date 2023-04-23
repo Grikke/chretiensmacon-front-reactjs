@@ -1,8 +1,10 @@
 import React, { MouseEventHandler } from 'react'
 
 const VincentMap = ({
-  onClick
-}: {onClick: MouseEventHandler<SVGElement>}) => {
+  onClick,
+	active= false
+}: {onClick: MouseEventHandler<SVGElement>
+active: boolean}) => {
   return (<g className="parish-group-svg" onClick={onClick}>
     <path id="path1743_1_" vector-effect="none" className="st4" d="M361.09,179.95l0.19,0.36l0.04,0.13l0.01,0.15l-0.1,0.05l-0.09,0.15
 		l-0.22,0.5l-0.21,0.35l-0.93,1.35l-0.06,0.26l-0.35,2.4l-0.12,0.36l-0.48,1.18l-0.36,0.99l-0.23,0.52l-0.12,0.22l-0.15,0.19
@@ -182,7 +184,7 @@ const VincentMap = ({
 		454.95,80.54 454.97,80.39 455.15,80 455.2,79.71 455.29,79.39 455.33,79.12 455.39,78.96 455.55,78.77 455.88,78.16 456.39,77.02 
 		456.63,76.58 456.92,75.8 457.03,75.24 455.91,74.83 455.82,74.78 455.75,74.69 454.29,71.49 454.2,71.77 454.05,71.72 
 		452.31,71.49 450.56,71.22 448.38,70.96 448.19,70.91 448.17,70.89 447.82,69.35 447.78,69.32 447.73,69.3 445.08,69.37 	"/>
-
+	<text x="254.46" y="133.69" style={{opacity: !active ? 1 : 0, fontSize: active ? "22px" : "", transition: '.21s all linear'}} className='parish-title'>Saint Vincent de Paul</text>
   </g>)
 }
 

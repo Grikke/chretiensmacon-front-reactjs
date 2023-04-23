@@ -1,57 +1,49 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useEffect, useMemo, useState } from 'react'
 import Button from '../Button/Button'
 import EstienneMap from './Estienne'
 import VincentMap from './Vincent'
 import VineyardMap from './Vineyard'
 
-import VincentImg from '../../../public/map/vincent.jpg'
-import EstienneImg from '../../../public/map/estienne.jpg'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
+import Church from './Church'
+import { useAtom } from 'jotai'
+import { parish } from '../../../lib/atom'
+
+import ParishList from '../../../lib/parish'
+import { useRouter } from 'next/router'
 
 
-export type IMap = {
-  
-}
-
-const parishTarget = {
-  estienne: {
-    title: 'Saint Etienne',
-    img: EstienneImg,
-    description: 'Créée en 2002, elle est au service des chrétiens pour qu’ils vivent de leur foi et la proclament.',
-    button: {
-      title: 'Sélectionner',
-      event: () => console.log(localStorage.getItem('parish'))
-    }
-  },
-  vincent: {
-    title: 'Saint Vincent de Paul',
-    img: VincentImg,
-    description: 'Paroisse Saint Vincent de Paul',
-    button: {
-      title: 'Sélectionner',
-      event: () => console.log(localStorage.getItem('parish'))
-    }
-  },
-  vineyard: {
-    title: 'Notre Dame des Vignes',
-    description: 'Recouvrant 15 villages en Sud Mâconnais. Elle rend présent cet amour du Christ pour tous les hommes.',
-    button: {
-      title: 'Voir le site',
-      event: () => window.location.href = "https://www.paroissendv.com/"
-    }
-  }
-}
+export type IMap = {}
 
 const Map = forwardRef<IMap>(({}) => {
-  const [selectedTarget, selectTarget] = useState<string | null>(null)
+  const [activeParish, setActiveParish] = useAtom(parish)
+  const [selectedTarget, selectTarget] = useState<string | null>(activeParish)
+  const router = useRouter()
+
+  const parishTarget: {[key: string] : {
+    title: string
+    img?: StaticImageData
+    description: string
+    button: {
+      title: string
+      event?: () => void
+    }
+  }} = ParishList
+  useEffect(() => {
+    router.prefetch('/actualites')
+  }, [])
+  const selectedParish = useMemo(() => selectedTarget && parishTarget?.[selectedTarget] ? parishTarget?.[selectedTarget] : null, [selectedTarget])
     return (
       <div className="map-container">
-        {(typeof selectedTarget === "string" && parishTarget?.[selectedTarget]) && <div className="target-info">
-          {parishTarget?.[selectedTarget]?.img && <Image className="image-background" src={parishTarget?.[selectedTarget]?.img} alt="Photo d'une église de la paroisse"/>}
-          <div className='title'>{parishTarget?.[selectedTarget]?.title}</div>
-          <div className="description">{parishTarget?.[selectedTarget]?.description}</div>
-          <Button className="target-button" variant='primary' onClick={parishTarget?.[selectedTarget]?.button.event}>
-            {parishTarget?.[selectedTarget]?.button?.title}
+        {selectedParish && <div className="target-info">
+          {selectedParish?.img && <Image className="image-background" src={selectedParish?.img} alt="Photo d'une église de la paroisse"/>}
+          <div className='title'>{selectedParish.title}</div>
+          <div className="description">{selectedParish.description}</div>
+          <Button className="target-button" variant='primary' onClick={selectedParish.button.event ? selectedParish.button.event : () => { 
+            setActiveParish(selectedTarget)
+            router.replace('/actualites')
+          }}>
+            {selectedParish.button?.title}
           </Button>
         </div>}
         <svg className="map-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -2541,7 +2533,7 @@ const Map = forwardRef<IMap>(({}) => {
           l-0.09-0.04l-0.21-0.15l-0.2-0.17l-0.03-0.02l-0.04-0.01l-0.04-0.01h-0.51l-0.09-0.01l-0.09-0.02l-0.1-0.04l-0.05-0.03l-0.26-0.26
           l-0.04-0.06l-0.04-0.06l-0.06-0.05l-0.11-0.06l-0.31-0.1l-0.38-0.1l-0.36-0.09l-0.51-0.11l-0.15-0.05l-0.4-0.18l-0.37-0.19
           l-0.39-0.17l-0.3-0.17l-0.07-0.03l-0.92-0.32l-0.09-0.03l-2.47-0.94"/>
-        <VincentMap onClick={() => selectTarget('vincent')}/>
+        <VincentMap onClick={() => selectTarget('vincent')} active={selectedTarget === 'vincent'}/>
         <path id="path4759_1_" vector-effect="none" className="st8" d="M489.35,481.05h-0.06l-0.04,0.01l-0.06,0.13l-0.01,0.02l-0.02,0.01
           l-0.02,0.01l-0.12-0.03l-0.2-0.14l-0.02-0.01l-0.16,0.01l-0.04,0.01l-0.25-0.12l-0.11,0.03l-0.02,0.02l-0.03,0.01h-0.02l-0.12-0.03
           l-0.09-0.03l-0.25-0.03l-0.12-0.04l-0.22-0.09l-0.14-0.05l-0.12,0.01l-0.25,0.04l-0.28,0.01l-0.07-0.01l-0.07-0.02l-0.07-0.02
@@ -2603,7 +2595,7 @@ const Map = forwardRef<IMap>(({}) => {
           l-0.1-0.09l-0.06-0.05l-0.07-0.04l-0.4-0.23l-0.04-0.03l-0.04-0.03l-0.03-0.04l-0.16-0.19l-0.06-0.06l-0.06-0.06l-0.64-0.5
           l-0.12-0.15l-0.17-0.24l-0.13-0.19l-0.12-0.19l-0.17-0.36l-0.04-0.1l-0.12-0.38l-0.06-0.14l-0.02-0.05l-0.04-0.06l-0.04-0.04
           l-0.49-0.55l-0.21-0.22"/>
-        <VineyardMap onClick={() => selectTarget('vineyard')}/>
+        <VineyardMap onClick={() => selectTarget('vineyard')} active={selectedTarget === 'vineyard'}/>
         <path id="path4761_1_" vector-effect="none" className="st8" d="M488.18,430.21l1.01,0.61l1.07,0.8l-0.28,1.95l0.14,0.06l0.23,3.31
           l0.38,0.35l0.04,0.04l-0.06,0.1l-0.06,0.48l-0.08,0.23l-0.98,1.13l-0.96,1.07l-0.08,0.14l-0.15,0.14l-0.25,0.31l-0.17,0.29
           l-0.24,0.95l-0.45,0.83l-0.19,0.33l0.15,0.19v0.1l-0.07,0.79l-0.12,0.93l-0.98,5.18l-0.02,0.07l0.85,0.19l-0.1,1.33l-0.15,1
@@ -2730,7 +2722,7 @@ const Map = forwardRef<IMap>(({}) => {
           l0.4-0.25l-0.51-0.16l-0.57,0.12l-0.29,0.03l-0.41-0.02l-0.28-0.05l-0.78-0.21l-1.35-0.27l-0.63-0.05l-0.62,0.02l-0.8,0.06
           l-0.27,0.03l-2.02,0.54l-0.78,0.17l-0.82,0.06l-0.48-0.01l-0.56-0.07l-0.46-0.03h-0.31l-0.28-0.02h-0.54l-0.81-0.08l-1.6-0.25
           l-2.3-0.43l-1.36-0.49"/>
-        <EstienneMap onClick={() => selectTarget('estienne')}/>
+        <EstienneMap onClick={() => selectTarget('estienne')} active={selectedTarget === 'estienne'}/>
         <path id="path4009_1_" vector-effect="none" className="st10" d="M312.96,362.33l0.35,0.14l0.12,0.14l0.45,0.22l1.02,0.64l0.29,0.14
           l0.27,0.29l0.93,0.64l0.17,0.35l1.29,1.17l0.54,0.16l0.06,0.1l0.04,0.27l0.08,0.28l0.19,0.15l0.12,0.33l0.22,0.14l0.2,0.15
           l0.21,0.21l0.17,0.22l0.78,1.08l0.52,0.61l0.31,0.33l0.05,0.1l0.82,0.92l0.24-0.13l0.16-0.05l0.14-0.04h0.22l0.44,0.09l0.1,0.07
@@ -2890,14 +2882,21 @@ const Map = forwardRef<IMap>(({}) => {
             C804.26,270.01,685.71,314.62,685.71,314.62z"/>
         </g>
         
-        <circle className="st16" cx="430.57" cy="214.49" r="7"/>
-        <circle className="st16" cx="412.07" cy="281.99" r="7"/>
-        <circle className="st16" cx="384.07" cy="244.99" r="7"/>
-        <circle className="st16" cx="356.07" cy="261.99" r="7"/>
-        <circle className="st16" cx="448.07" cy="171.99" r="7"/>
-        <circle className="st16" cx="431.07" cy="105.99" r="7"/>
-        <circle className="st16" cx="391.07" cy="164.99" r="7"/>
-        <circle className="st16" cx="395.07" cy="74.99" r="7"/>
+        <g style={{opacity: selectedTarget === 'estienne' ? 1 :1, transition: '.21s all linear', pointerEvents: 'none'}}>
+          <Church show={selectedTarget === 'estienne'} name="Saint Vincent" x="430.57" y="214.49"/>
+          <Church show={selectedTarget === 'estienne'} name="Saint Pierre" x="422.07" y="241.99"/>
+          <Church show={selectedTarget === 'estienne'} name="Saint Clément" x="412.07" y="271.99"/>
+          <Church show={selectedTarget === 'estienne'} name="Sacré Coeur" x="384.07" y="224.99" reverse={true}/>
+          <Church show={selectedTarget === 'estienne'} name="Sainte Madeleine" x="356.07" y="261.99" reverse={true}/>
+        </g>
+        <g style={{opacity: selectedTarget === 'vincent' ? 1 : 1, transition: '.21s all linear', pointerEvents: 'none'}}>
+          <Church show={selectedTarget === 'vincent'} name="Notre Dame de la Paix" x="428.07" y="181.99"/>
+          <Church show={selectedTarget === 'vincent'} name="Sancé" x="431.07" y="151.99"/>
+          <Church show={selectedTarget === 'vincent'} name="Sennecé" x="431.07" y="105.99"/>
+          <Church show={selectedTarget === 'vincent'} name="Flacé" x="371.07" y="164.99" reverse={true}/>
+          <Church show={selectedTarget === 'vincent'} name="Hurigny" x="391.07" y="124.99" reverse={true}/>
+          <Church show={selectedTarget === 'vincent'} name="Laizé" x="395.07" y="54.99" reverse={true}/>
+        </g>
         </svg>
       </div>
     )

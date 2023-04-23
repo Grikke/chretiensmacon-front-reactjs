@@ -22,7 +22,7 @@ const ArticleCarousel = (
     {articles} : IArticle
   ) => {
     return (
-      <Carousel containerClass="carousel-container" sliderClass='carousel-container' autoPlay={true} autoPlaySpeed={5000} infinite={true} responsive={responsive}>
+      <Carousel containerClass="carousel-container" sliderClass='carousel-container' autoPlay={articles.length < 1} autoPlaySpeed={5000} infinite={true} responsive={responsive}>
         {articles.slice(0, 10).map(article => (
           <div
             className="carousel-item carousel-article"
