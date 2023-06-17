@@ -25,6 +25,10 @@ export default function DefaultLayout({children} : {children: ReactNode}) {
     else 
       router.push('/')
   }, [])
+
+  useEffect(() => {
+    toggleMenu(false)
+  }, [router.asPath])
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   useEffect(() => {
@@ -65,7 +69,7 @@ export default function DefaultLayout({children} : {children: ReactNode}) {
         <div className="informative-container">
           <div>
             <button>
-              <a href="https://autun.catholique.fr/">Diocèse d'Autun</a>
+              <a href="https://autun.catholique.fr/">Diocèse d{"'"}Autun</a>
             </button>
           </div>
           {activeParish ? <div><b>Paroisse - </b>{isMobile ? parishTarget?.[activeParish]?.title.replace('de Paul', '').trim() : parishTarget?.[activeParish]?.title}</div> :

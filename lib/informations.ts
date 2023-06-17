@@ -29,14 +29,7 @@ export const getPages = gql`
 `
 
 export type ICalendar = {
-  friday?: string
-  monday?: string
-  relatedInformations?: string
-  saturday?: string
-  sunday?: string
-  thursday?: string
-  wednesday?: string
-  tuesday?: string
+  [key: string]: string
 }
 
 export type IScheduleItem = {

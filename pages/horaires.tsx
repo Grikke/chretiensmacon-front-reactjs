@@ -26,14 +26,14 @@ export default function NewsPage({schedules} : ISchedulesPage) {
   return (
     <div>
       <div className="section-container main-schedule">
-        {mainSchedules.map((schedule) => (<div className="schedule-item">
+        {mainSchedules.map((schedule, index) => (<div key={index} className="schedule-item">
           <h2 className="schedule-title">{schedule.title}</h2>
           <pre className="schedule-description">{schedule.schedulePost.description}</pre>
           {(activeParish === 'vincent' || activeParish === 'estienne') && <ScheduleCalendar calendar={schedule.schedulePost?.[activeParish]}/>}
         </div>))}
       </div>
       <div className="section-container seasonal-schedule">
-        {seasonalSchedules.map((schedule) => (<div className="schedule-item">
+        {seasonalSchedules.map((schedule, index) => (<div key={index} className="schedule-item">
           <h2 className="schedule-title">{schedule.title}</h2>
           <pre className="schedule-description">{schedule.schedulePost.description}</pre>
           {(activeParish === 'vincent' || activeParish === 'estienne') && <ScheduleCalendar calendar={schedule.schedulePost?.[activeParish]}/>}

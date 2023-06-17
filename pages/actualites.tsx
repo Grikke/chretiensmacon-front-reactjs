@@ -92,7 +92,7 @@ export default function NewsPage({articles} : INewsPage) {
         </div>
         <div className="page-container">
           {pageNumber.map((val, index) => (
-            <div className="page-button">
+            <div key={index} className="page-button">
               <div className="page-event-button" onClick={() => setPagination(nbPage * (index + 1))}>
                 {index + 1}
               </div>

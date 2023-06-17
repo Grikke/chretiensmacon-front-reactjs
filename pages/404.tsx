@@ -29,7 +29,7 @@ export default function ErrorPage({} : IErrorPage) {
           </div>
           <Button variant={"primary"} size={"lg"} className="redirect-button">
             <Link href="/">
-              Revenir à l'Accueil
+              Revenir à l{"'"}Accueil
             </Link>
           </Button>
         </div>

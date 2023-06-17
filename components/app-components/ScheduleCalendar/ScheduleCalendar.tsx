@@ -33,7 +33,7 @@ const ScheduleCalendar = (
   (
     {calendar} : IScheduleCalendar
   ) => {
-    let translations = {
+    let translations: {[key: string]: string} = {
       monday: 'Lundi',
       tuesday: 'Mardi',
       wednesday: 'Mercredi',

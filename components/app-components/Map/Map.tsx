@@ -2862,40 +2862,42 @@ const Map = forwardRef<IMap>(({}) => {
           l-1.36-0.45l-1.09-0.36l-2.12-0.7l-0.14-0.05l-0.49-0.16l-0.04-0.05l-0.03,0.04l-0.03-0.02l-0.04-0.02l-0.38-0.04l-0.03,0.01
           l-0.52-0.09l-0.06-0.01l-0.15-0.03l-0.4-0.03l-0.38-0.02l-0.51-0.28l-0.91-0.52l-0.07-0.04l-0.21-0.09l-1.6-0.58l-0.91-0.1
           l-2.38-0.29l-0.14-0.02l-0.03-0.01l-0.13-0.01l-0.15-0.02l-0.19-0.02l-0.3-0.02l-0.28-0.03"/>
-        <g id="layer3_1_" className="st12">
-          <path id="path2855_1_" className="st13" d="M685.91,314.43c0,0,118.55-44.61,118.55-157.98s0-102.69,0-102.69H567.35v102.69
-            C567.35,269.82,685.91,314.43,685.91,314.43z"/>
-        </g>
-        <g id="layer5_1_">
-          <path id="path17660_1_" className="st14" d="M630.91,85.34c-22.3,0-40.4,18.1-40.4,40.4s18.1,40.4,40.4,40.4
-            c22.3,0,40.41-18.1,40.41-40.4S653.22,85.34,630.91,85.34z M631.31,98.98c14.28,0,25.87,11.59,25.87,25.88
-            s-11.58,25.88-25.87,25.88s-25.88-11.59-25.88-25.88S617.03,98.98,631.31,98.98z"/>
-          <path id="path18555_1_" className="st14" d="M686.55,179.06c-22.61,0-40.96,18.35-40.96,40.96s18.35,40.96,40.96,40.96
-            s40.96-18.35,40.96-40.96S709.16,179.06,686.55,179.06z M686.95,192.9c14.48,0,26.23,11.75,26.23,26.23s-11.75,26.24-26.23,26.24
-            c-14.48,0-26.24-11.76-26.24-26.24C660.71,204.65,672.47,192.9,686.95,192.9z"/>
-          <path id="path18561_1_" className="st14" d="M742.36,84.78c-22.61,0-40.96,18.35-40.96,40.96s18.35,40.96,40.96,40.96
-            c22.61,0,40.96-18.35,40.96-40.96S764.97,84.78,742.36,84.78z M742.75,98.62c14.48,0,26.23,11.75,26.23,26.23
-            s-11.75,26.24-26.23,26.24c-14.48,0-26.24-11.76-26.24-26.24S728.27,98.62,742.75,98.62z"/>
-        </g>
-        <g id="layer1_1_">
-          <path id="path1411_1_" className="st15" d="M685.71,314.62c0,0-118.55-44.61-118.55-157.98s0-102.69,0-102.69h237.11v102.69
-            C804.26,270.01,685.71,314.62,685.71,314.62z"/>
+        <g width={10}>
+          <g id="layer3_1_" className="st12">
+            <path id="path2855_1_" className="st13" d="M685.91,314.43c0,0,118.55-44.61,118.55-157.98s0-102.69,0-102.69H567.35v102.69
+              C567.35,269.82,685.91,314.43,685.91,314.43z"/>
+          </g>
+          <g id="layer5_1_">
+            <path id="path17660_1_" className="st14" d="M630.91,85.34c-22.3,0-40.4,18.1-40.4,40.4s18.1,40.4,40.4,40.4
+              c22.3,0,40.41-18.1,40.41-40.4S653.22,85.34,630.91,85.34z M631.31,98.98c14.28,0,25.87,11.59,25.87,25.88
+              s-11.58,25.88-25.87,25.88s-25.88-11.59-25.88-25.88S617.03,98.98,631.31,98.98z"/>
+            <path id="path18555_1_" className="st14" d="M686.55,179.06c-22.61,0-40.96,18.35-40.96,40.96s18.35,40.96,40.96,40.96
+              s40.96-18.35,40.96-40.96S709.16,179.06,686.55,179.06z M686.95,192.9c14.48,0,26.23,11.75,26.23,26.23s-11.75,26.24-26.23,26.24
+              c-14.48,0-26.24-11.76-26.24-26.24C660.71,204.65,672.47,192.9,686.95,192.9z"/>
+            <path id="path18561_1_" className="st14" d="M742.36,84.78c-22.61,0-40.96,18.35-40.96,40.96s18.35,40.96,40.96,40.96
+              c22.61,0,40.96-18.35,40.96-40.96S764.97,84.78,742.36,84.78z M742.75,98.62c14.48,0,26.23,11.75,26.23,26.23
+              s-11.75,26.24-26.23,26.24c-14.48,0-26.24-11.76-26.24-26.24S728.27,98.62,742.75,98.62z"/>
+          </g>
+          <g id="layer1_1_">
+            <path id="path1411_1_" className="st15" d="M685.71,314.62c0,0-118.55-44.61-118.55-157.98s0-102.69,0-102.69h237.11v102.69
+              C804.26,270.01,685.71,314.62,685.71,314.62z"/>
+          </g>
         </g>
         
-        <g style={{opacity: selectedTarget === 'estienne' ? 1 :1, transition: '.21s all linear', pointerEvents: 'none'}}>
-          <Church show={selectedTarget === 'estienne'} name="Saint Vincent" x="430.57" y="214.49"/>
-          <Church show={selectedTarget === 'estienne'} name="Saint Pierre" x="422.07" y="241.99"/>
-          <Church show={selectedTarget === 'estienne'} name="Saint Clément" x="412.07" y="271.99"/>
-          <Church show={selectedTarget === 'estienne'} name="Sacré Coeur" x="384.07" y="224.99" reverse={true}/>
-          <Church show={selectedTarget === 'estienne'} name="Sainte Madeleine" x="356.07" y="261.99" reverse={true}/>
+        <g style={{transition: '.21s all linear'}}>
+          <Church coordinates={'https://goo.gl/maps/ZJCWrkKPENsguKNV7'} show={selectedTarget === 'estienne'} name="Saint Vincent" x="430.57" y="214.49"/>
+          <Church coordinates={'https://goo.gl/maps/XYkERqdd6faje2TS6'} show={selectedTarget === 'estienne'} name="Saint Pierre" x="422.07" y="241.99"/>
+          <Church coordinates={'https://goo.gl/maps/SDajAN89RrquQRGd8'} show={selectedTarget === 'estienne'} name="Saint Clément" x="412.07" y="271.99"/>
+          <Church coordinates={'https://goo.gl/maps/MCY46oosEknZYcNv7'} show={selectedTarget === 'estienne'} name="Sacré Coeur" x="384.07" y="224.99" reverse={true}/>
+          <Church coordinates={'https://goo.gl/maps/iz9f8ubHU4zppudV7'} show={selectedTarget === 'estienne'} name="Sainte Madeleine" x="356.07" y="261.99" reverse={true}/>
         </g>
-        <g style={{opacity: selectedTarget === 'vincent' ? 1 : 1, transition: '.21s all linear', pointerEvents: 'none'}}>
-          <Church show={selectedTarget === 'vincent'} name="Notre Dame de la Paix" x="428.07" y="181.99"/>
-          <Church show={selectedTarget === 'vincent'} name="Sancé" x="431.07" y="151.99"/>
-          <Church show={selectedTarget === 'vincent'} name="Sennecé" x="431.07" y="105.99"/>
-          <Church show={selectedTarget === 'vincent'} name="Flacé" x="371.07" y="164.99" reverse={true}/>
-          <Church show={selectedTarget === 'vincent'} name="Hurigny" x="391.07" y="124.99" reverse={true}/>
-          <Church show={selectedTarget === 'vincent'} name="Laizé" x="395.07" y="54.99" reverse={true}/>
+        <g style={{transition: '.21s all linear'}}>
+          <Church coordinates={'https://goo.gl/maps/A9nmBeGJMNs8ucgu9'} show={selectedTarget === 'vincent'} name="Notre Dame de la Paix" x="428.07" y="181.99"/>
+          <Church coordinates={'https://goo.gl/maps/CRHHV8XtaZRyQhEUA'} show={selectedTarget === 'vincent'} name="Sancé" x="431.07" y="151.99"/>
+          <Church coordinates={'https://goo.gl/maps/g5JGNr42zLqJBnme6'} show={selectedTarget === 'vincent'} name="Sennecé" x="431.07" y="105.99"/>
+          <Church coordinates={'https://goo.gl/maps/ojdnvtNMRDX3tros8'} show={selectedTarget === 'vincent'} name="Flacé" x="371.07" y="164.99" reverse={true}/>
+          <Church coordinates={'https://goo.gl/maps/o1mKxbcQpqB5uGxq5'} show={selectedTarget === 'vincent'} name="Hurigny" x="391.07" y="124.99" reverse={true}/>
+          <Church coordinates={'https://goo.gl/maps/fEbBkKdyGD5BfsMBA'} show={selectedTarget === 'vincent'} name="Laizé" x="395.07" y="54.99" reverse={true}/>
         </g>
         </svg>
       </div>

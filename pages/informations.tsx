@@ -26,7 +26,7 @@ export default function InformationPage({pages} : IInformationPage) {
         <h2>Informations</h2>
         <div className="page-container">
           {pages.map(({slug, title}) => (
-            <Link href={`/${slug}`} className="page-item">
+            <Link key={title} href={`/${slug}`} className="page-item">
               <div className="title">
                 {title}
               </div>

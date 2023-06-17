@@ -26,7 +26,7 @@ export default function SacrementPage({pages} : IInformationPage) {
         <h2>Sacrements</h2>
         <div className="page-container">
         {pages.map(({slug, title}) => (
-            <Link href={`/sacrements/${slug}`} className="page-item">
+            <Link key={title} href={`/sacrements/${slug}`} className="page-item">
               <div className="title">
                 {title}
               </div>
