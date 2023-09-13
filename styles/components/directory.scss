@@ -1,0 +1,45 @@
+.directories-list {
+  display: flex;
+  flex: 1;
+  .directory-container {
+    position: relative;
+    display: flex;
+    flex: 0.5;
+    margin: 2px;
+    padding-left: 15px;
+    flex-direction: column;
+    border: 1px solid $primary-04;
+    border-radius: 5px;
+    padding-right: 15px;
+
+    background-size: cover;
+    background-position: center;
+    .background-directory {
+      width: 100%;
+      position: absolute;
+      height: 100%;
+      left: 0px;
+      backdrop-filter: blur(3px);
+      border-radius: 4px;
+      z-index: 1;
+      background-color: transparentize($primary-06, 0.2);
+    }
+    .directory-title {
+      color: $tertiary-01;
+      font-family: 'Montserrat';
+      font-weight: bold;
+      padding-top: 5px;
+      flex: 1;
+      z-index: 2;
+    }
+    .directory-line {
+      &.manager {
+        padding-bottom: 5px;
+      }
+      color: $tertiary-02;
+      font-size: 14px;
+      flex: 1;
+      z-index: 2;
+    }
+  }
+}

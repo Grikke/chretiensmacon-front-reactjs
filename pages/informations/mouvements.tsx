@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next'
 
-import { getArticles, IArticleItem } from '../lib/articles'
-import { addApolloState, initializeApollo } from '../lib/appolo'
+import { getArticles, IArticleItem } from '../../lib/articles'
+import { addApolloState, initializeApollo } from '../../lib/appolo'
 import {useState, useEffect} from 'react'
-import { getPages, IPageItem } from '../lib/informations'
+import { getPages, IPageItem } from '../../lib/informations'
 import Link from 'next/link'
 
 type IInformationPage = {
@@ -25,13 +25,21 @@ export default function InformationPage({pages} : IInformationPage) {
       <div className="section-container">
         <h2>Informations</h2>
         <div className="page-container">
-          {pages.map(({slug, title}) => (
-            <Link key={title} href={`/${slug}`} className="page-item">
-              <div className="title">
-                {title}
-              </div>
-            </Link>
-          ))}
+          <Link href={`/informations/mouvements`} className="page-item">
+            <div className="title">
+              Jeunes
+            </div>
+          </Link>
+          <Link href={`/informations/jeunes`} className="page-item">
+            <div className="title">
+              Mouvements
+            </div>
+          </Link>
+          <Link href={`/informations/spiritualite`} className="page-item">
+            <div className="title">
+              Équipe Paroissiale
+            </div>
+          </Link>
         </div>
       </div>
     </div>

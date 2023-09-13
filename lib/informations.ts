@@ -78,6 +78,40 @@ export const getSchedules = gql`
   }
 `
 
+export type IDirectoryItem = {
+  title: string
+  annuaryPost: {
+    manager?: string
+    type: string
+    description: string
+    contactEmail?: string
+    contactPhone?: string
+    avatar: {
+      sourceUrl: string
+    }
+  }
+}
+
+export const getDirectories = gql`
+query getDirectories {
+  directories {
+    nodes {
+      title
+      annuaryPost {
+        manager
+        type
+        description
+        contactPhone
+        contactEmail
+        avatar {
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+`
+
 export const getSacrementPages = gql`
   query getSacrementPages {
     pages(first: 50, where: {parent: "94"}) {
