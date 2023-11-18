@@ -135,25 +135,30 @@
 
 @media (max-width: 1100px) {
   .target-info {
-    bottom: 7%;
-    right: 2%;
-    width: 180px;
-    margin-right: -20%;
+    background-color: transparentize(#912d2d, 0.1);
+    width: 80%;
+    position: static;
+    display: block;
+    margin: auto;
+    margin-bottom: 40px;
     & .title {
-      font-size: 10pt;
+      font-size: 17pt;
     }
     & .description {
-      font-size: 7pt;
+      font-size: 12pt;
+    }
+    & .image-background {
+      display: none;
     }
     & .target-button {
-      font-size:7pt;
+      font-size:12pt;
     }
   }
   .map-container {
     width: 164%;
     margin-left: -40%;
     .map-svg {
-      width: 125%;
+      width: 135%;
     }
   }
 }
