@@ -1,30 +1,38 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 
-import { findArticle, getArticles, IArticleItem } from '../../lib/articles'
+import { findArticle, IArticleItem } from '../../lib/articles'
 import { addApolloState, initializeApollo } from '../../lib/appolo'
-import Loader from '../../components/app-components/Loader/Loader'
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import clsx from 'clsx'
-import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
+import Head from 'next/head'
 
 
 //Initialize Apollo Client for SSR
 
 
-export default function Article() {
-  const {query} = useRouter()
-  const { data, loading } = useQuery<{post: IArticleItem}>(findArticle, { variables: {id: query.articleName} })
-  const article = useMemo(() => data?.post ?? null, [data])
+export default function Article({article}: {article: IArticleItem}) {
   const [headerOver, setHeaderOver] = useState(false)
+  const [hydrated, setHydrated] = useState(false)
   const props = {
     onMouseOver: () => setHeaderOver(true),
     onMouseOut: () => setHeaderOver(false)
   }
+  useEffect(() => {
+    setHydrated(true)
+  }, [])
+  if (!article || !hydrated)
+    return null
   return (
     <div>
-      {!article || loading && <Loader/>}
-      {(article && !loading) && <div className='section-container'>
+      <Head>
+        <title>Chrétiens Mâcon - {article?.title}</title>
+        <meta
+          name="description"
+          content={article?.content?.replace(/<[^>]*>?/gm, '').slice(0, 300) ?? ""}
+          key="description"
+        />
+      </Head>
+      {(article) && <div className='section-container'>
         <div className={clsx('article-header', headerOver && "hover" )} style={{backgroundImage: article?.featuredImage ? `url(${article.featuredImage.node.sourceUrl})` : ''}}>
           <div {...props} className='article-header-background'/>
           <div className='category-article-list'>
@@ -39,4 +47,34 @@ export default function Article() {
       </div>}
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps<{
+  productSlug: string
+}> = async ({ req, res, params }) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=600, stale-while-revalidate=600'
+  )
+  //Initialize Apollo Client for SSR
+  const client = initializeApollo()
+
+  const { articleName } = params!
+
+  try {
+    const {data} = await client.query<{post: IArticleItem}>({
+      query: findArticle,
+      variables: {id: articleName},
+      context: { target: 'prestashop' },
+    })
+    if (data?.post === null) {
+        return { notFound: true }
+    }
+    return addApolloState(client, {
+      props: { article: data?.post, pageType: 'articlepage' },
+    })
+  } catch (e) {
+    console.error(e)
+    return { notFound: true }
+  }
 }

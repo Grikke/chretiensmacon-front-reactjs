@@ -54,6 +54,7 @@ const ScheduleCalendar = (
       'sunday'
     ]
     let date = new Date()
+    console.log(date.getDay())
     return (
       <div className="calendar-schedule">
         <div className="calendar-week">
@@ -71,7 +72,7 @@ const ScheduleCalendar = (
             <DayElement 
               name={translations?.[day]} 
               key={index} day={calendar?.[day]} 
-              isToday={date.getDay() === 5 && index === 0 || date.getDay() === 6 && index === 1}
+              isToday={date.getDay() === 6 && index === 0 || date.getDay() === 0 && index === 1}
             />
           )}
         </div>
