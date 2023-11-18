@@ -35,14 +35,14 @@ const Footer = () => {
         </div>
         <div className="footer-section">
           <p>Paroisse de {parishTarget?.[activeParish]?.title}</p>
-          {typeof parishTarget?.[activeParish]?.address === "string" && parishTarget?.[activeParish]?.address.split('|').map(a =>(<p>{a}</p>))}
+          {typeof parishTarget?.[activeParish]?.address === "string" && parishTarget?.[activeParish]?.address.split('|').map((a, index) =>(<p key={index}>{a}</p>))}
         </div>
       </div>}
       {!activeParish && <div className="footer-container">
         <div className="footer-section">
           <p><b>Contact du diocèse :</b></p>
           <p><a href={`tel:${formatPhone(dioceseContact.phone)}`}>{dioceseContact.phone}</a></p>
-          {dioceseContact.address.split('|').map(a =>(<p>{a}</p>))}
+          {dioceseContact.address.split('|').map((a, index) =>(<p key={index}>{a}</p>))}
         </div>
       </div>}
     </footer>
