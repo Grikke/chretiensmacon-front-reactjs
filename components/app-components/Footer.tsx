@@ -30,12 +30,12 @@ const Footer = () => {
       {activeParish && <div className="footer-container">
         <div className="footer-section">
           <p><b>Contact de la paroisse :</b></p>
-          {parishTarget?.[activeParish]?.phone && <p><a href={`tel:${formatPhone(parishTarget?.[activeParish]?.phone)}`}>{parishTarget?.[activeParish]?.phone}</a></p>}
+          {parishTarget?.[activeParish]?.phone && <p><a href={`tel:${formatPhone(parishTarget?.[activeParish]?.phone ?? "")}`}>{parishTarget?.[activeParish]?.phone}</a></p>}
           {parishTarget?.[activeParish]?.mail && <p><a href={`mailto:${parishTarget?.[activeParish]?.mail}`}>{parishTarget?.[activeParish]?.mail}</a></p>}
         </div>
         <div className="footer-section">
           <p>Paroisse de {parishTarget?.[activeParish]?.title}</p>
-          {typeof parishTarget?.[activeParish]?.address === "string" && parishTarget?.[activeParish]?.address.split('|').map((a, index) =>(<p key={index}>{a}</p>))}
+          {(parishTarget?.[activeParish]?.address ?? "").split('|').map((a, index) =>(<p key={index}>{a}</p>))}
         </div>
       </div>}
       {!activeParish && <div className="footer-container">
