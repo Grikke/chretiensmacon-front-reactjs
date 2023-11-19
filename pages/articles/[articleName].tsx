@@ -12,16 +12,11 @@ import Head from 'next/head'
 
 export default function Article({article}: {article: IArticleItem}) {
   const [headerOver, setHeaderOver] = useState(false)
-  const [hydrated, setHydrated] = useState(false)
   const props = {
     onMouseOver: () => setHeaderOver(true),
     onMouseOut: () => setHeaderOver(false)
   }
-  useEffect(() => {
-    setHydrated(true)
-  }, [])
-  if (!article || !hydrated)
-    return null
+
   return (
     <div>
       <Head>
