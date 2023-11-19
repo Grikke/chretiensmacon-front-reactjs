@@ -1,7 +1,6 @@
 import React from "react";
 
 const LogoIcon = ({full = false}) => {
-
   if (full)
     return (
       <div className="logo-full-svg">

@@ -193,8 +193,12 @@ footer a {
 header {
   .logo-svg {
     width: 100%;
+    margin-left: 15px;
+    margin-right: 35px;
     height: 100%;
-    & .svg {
+    svg {
+      display: block;
+      margin: auto;
       height:100%;
     }
     .cls-1{
@@ -410,10 +414,18 @@ header {
   footer {
     .footer-container {
       .footer-section {
+        &:first-child {
+          padding-top: 30px;
+          padding-bottom: 0px;
+        }
+        &:last-child {
+          padding-top: 10px;
+          padding-bottom: 20px;
+        }
         padding-left: 20px;
         padding-right: 20px;
       }
-      flex-direction: column-reverse;
+      flex-direction: column;
     }
   }
   header {

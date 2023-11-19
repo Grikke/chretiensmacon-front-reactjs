@@ -37,11 +37,11 @@ const ArticleCarousel = (
             <div className="carousel-filter" />
             <div className="carousel-title">{article.title}</div>
             <div className="carousel-button-container">
+            <Link href={`/articles/${article.slug}`}>
               <Button variant='primary' className="carousel-button" size={"lg"}>
-                <Link href={`/articles/${article.slug}`}>
                   En savoir plus
-                </Link>
               </Button>
+            </Link>
             </div>
           </div>
         ))}

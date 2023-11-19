@@ -32,7 +32,6 @@ const isParishRelated = (categories: {nodes: {slug: string}[]} ) => {
 
 export default function NewsPage({articles} : INewsPage) {
   const nbPage = 8
-  const [hydrated, setHydrated] = useState(false)
   const [hasFiltered, setHasFiltered] = useState(false)
   const [pagination, setPagination] = useState(nbPage)
   const activeParish = useAtomValue(parish)
@@ -41,9 +40,6 @@ export default function NewsPage({articles} : INewsPage) {
   const [hotArticles, setHotArticles] = useState(articles.filter((article) => 
     article.acfPriorities.expirationDate && !hasExpired(article.acfPriorities.expirationDate)
   ))
-  useEffect(() => {
-      setHydrated(true);
-  }, []);
   useEffect(() => {
     if (activeParish && !hasFiltered) {
       setHasFiltered(true)
@@ -68,7 +64,6 @@ export default function NewsPage({articles} : INewsPage) {
   const pageNumber = useMemo(() => 
     new Array(Math.ceil(commonArticles.length / nbPage)).fill('').flat()
   , [commonArticles])
-  if (!hydrated) return null
 
   return (
     <div>
@@ -94,7 +89,7 @@ export default function NewsPage({articles} : INewsPage) {
           {pageNumber.map((val, index) => (
             <div key={index} className="page-button">
               <div className="page-event-button" onClick={() => setPagination(nbPage * (index + 1))}>
-                {index + 1}
+                <div>{index + 1}</div>
               </div>
             </div>
           ))}

@@ -8,9 +8,14 @@
     margin: 2px;
     padding-left: 15px;
     flex-direction: column;
-    border: 1px solid $primary-04;
+    border: 1px solid $primary-05;
     border-radius: 5px;
     padding-right: 15px;
+    padding-bottom: 15px;
+    font-family: 'Montserrat';
+    height: min-content;
+    margin-top: auto;
+    margin-bottom: auto;
 
     background-size: cover;
     background-position: center;
@@ -22,24 +27,55 @@
       backdrop-filter: blur(3px);
       border-radius: 4px;
       z-index: 1;
-      background-color: transparentize($primary-06, 0.2);
+      background-color: transparentize($primary-05, 0.3);
     }
     .directory-title {
-      color: $tertiary-01;
-      font-family: 'Montserrat';
+      display: inline-flex;
+      text-transform: uppercase;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
       font-weight: bold;
-      padding-top: 5px;
+      .directory-image {
+        border-radius: 25px;
+        margin-right: 5px;
+        border: 2px solid $primary-05;
+      }
+      color: $grey-01;
+      font-size: 18px;
+      font-family: 'Nova Cut';
+      font-weight: bold;
+      padding-top: 10px;
       flex: 1;
       z-index: 2;
     }
-    .directory-line {
-      &.manager {
-        padding-bottom: 5px;
+    .directory-contact {
+      padding-bottom: 5px;
+      padding-top: 10px;
+      font-style: italic;
+      margin-bottom: 5px;
+      z-index: 2;
+      font-weight: bold;
+      border-bottom: 1px solid $grey-01;
+      .directory-info {
+        font-weight: normal;
       }
-      color: $tertiary-02;
+    }
+    .directory-line {
+      color: $grey-01;
       font-size: 14px;
       flex: 1;
       z-index: 2;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .directories-list  {
+    flex-direction: column; 
+    .directory-container {
+      flex: 1;
+      margin-top: 15px;
     }
   }
 }

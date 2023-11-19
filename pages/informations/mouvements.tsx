@@ -1,62 +1,43 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 
 import { getArticles, IArticleItem } from '../../lib/articles'
 import { addApolloState, initializeApollo } from '../../lib/appolo'
 import {useState, useEffect} from 'react'
-import { getPages, IPageItem } from '../../lib/informations'
+import { getDirectories, getPages, IDirectoryItem, IPageItem } from '../../lib/informations'
 import Link from 'next/link'
+import DirectoryItem from '../../components/app-components/DirectoryItem/DirectoryItem'
 
-type IInformationPage = {
-  pages: IPageItem[]
+type IDirectoryPage = {
+  directories: IDirectoryItem[]
 }
 
-export default function InformationPage({pages} : IInformationPage) {
-  const [hydrated, setHydrated] = useState(false);
-  console.log(pages)
-    useEffect(() => {
-      setHydrated(true);
-    }, []);
-    if (!hydrated) {
-        // Returns null on first render, so the client and server match
-        return null;
-    }
+export default function YouthDirectoryPage({directories} : IDirectoryPage) {
   return (
     <div>
       <div className="section-container">
-        <h2>Informations</h2>
+        <h2>Annuaire des Mouvements Jeunesses</h2>
         <div className="page-container">
-          <Link href={`/informations/mouvements`} className="page-item">
-            <div className="title">
-              Jeunes
-            </div>
-          </Link>
-          <Link href={`/informations/jeunes`} className="page-item">
-            <div className="title">
-              Mouvements
-            </div>
-          </Link>
-          <Link href={`/informations/spiritualite`} className="page-item">
-            <div className="title">
-              Équipe Paroissiale
-            </div>
-          </Link>
+          <div className="directories-list">
+            {directories.map((dir) => (
+              <DirectoryItem key={dir?.title} directory={dir}/>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   try {
     //Initialize Apollo Client for SSR
     const client = initializeApollo()
-    const { data } = await client.query({ query: getPages })
+    const { data } = await client.query({ query: getDirectories })
 
-    if (!data?.pages?.nodes)
+    if (!data?.directories?.nodes)
       return { notFound: true }
     return addApolloState(client, {
-      props: { pageType: 'infopage', pages: data?.pages?.nodes },
-      revalidate: 30,
+      props: { pageType: 'infopage', directories: data?.directories?.nodes.filter((dir: IDirectoryItem) => dir?.annuaryPost?.type === "youth") },
     })
   } catch (e) {
     console.error(e)

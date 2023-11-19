@@ -2,12 +2,9 @@ import { GetServerSideProps } from 'next'
 
 import { findArticle, IArticleItem } from '../../lib/articles'
 import { addApolloState, initializeApollo } from '../../lib/appolo'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import clsx from 'clsx'
 import Head from 'next/head'
-
-
-//Initialize Apollo Client for SSR
 
 
 export default function Article({article}: {article: IArticleItem}) {

@@ -34,7 +34,8 @@
   &.button-primary {
     box-shadow: 0px 0px 5px $primary-06;
     background-color: $primary-06;
-    color: $secondary-02;
+    color: $secondary-01;
+    border-color: $secondary-01;
     &:hover {
       color: $secondary-01;
       border-color: $primary-03;
