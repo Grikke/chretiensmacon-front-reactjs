@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 
-import { getArticles, IArticleItem } from '../lib/articles'
+import { getArticles, IArticleItem } from '../../lib/articles'
 import { addApolloState, initializeApollo } from '../../lib/appolo'
 import {useState, useEffect} from 'react'
 import { getSacrementPages, IPageItem } from '../../lib/informations'
