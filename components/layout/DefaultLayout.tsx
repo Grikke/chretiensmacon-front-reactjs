@@ -8,7 +8,6 @@ import { useRouter } from 'next/router'
 import Header from '../app-components/Header/Header'
 import InformativeHeader from '../app-components/Header/InformativeHeader'
 import Footer from '../app-components/Footer'
-import CustomHead from '../app-components/CustomHead'
 
 export default function DefaultLayout({children} : {children: ReactNode}) {
   const [activeParish, setActiveParish] = useAtom(parish)
@@ -33,7 +32,6 @@ export default function DefaultLayout({children} : {children: ReactNode}) {
   
   return (
     <div className={styles.container}>
-      <CustomHead/>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
