@@ -20,6 +20,7 @@ const CustomHead = ({
   return (
     <Head>
       <title>{metaTitle}</title>
+      <meta name="theme-color" content="#752c2d"></meta>
       <meta name="description" content={metaDescription} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={metaUrl} />
