@@ -5,6 +5,7 @@ import { addApolloState, initializeApollo } from '../lib/appolo'
 import {useState, useEffect} from 'react'
 import { getSacrementPages, IPageItem } from '../lib/informations'
 import Link from 'next/link'
+import CustomHead from '../components/app-components/CustomHead'
 
 type IInformationPage = {
   pages: IPageItem[]
@@ -22,6 +23,7 @@ export default function SacrementPage({pages} : IInformationPage) {
     }
   return (
     <div>
+      <CustomHead title={"Sacrements"} description="Informations sur les sacrements catholiques."/>
       <div className="section-container">
         <h2>Sacrements</h2>
         <div className="page-container">

@@ -5,6 +5,7 @@ import { addApolloState, initializeApollo } from '../../lib/appolo'
 import { useState } from 'react'
 import clsx from 'clsx'
 import Head from 'next/head'
+import CustomHead from '../../components/app-components/CustomHead'
 
 
 export default function Article({article}: {article: IArticleItem}) {
@@ -16,14 +17,11 @@ export default function Article({article}: {article: IArticleItem}) {
 
   return (
     <div>
-      <Head>
-        <title>Chrétiens Mâcon - {article?.title}</title>
-        <meta
-          name="description"
-          content={article?.content?.replace(/<[^>]*>?/gm, '').slice(0, 300) ?? ""}
-          key="description"
-        />
-      </Head>
+      <CustomHead 
+        title={article?.title} 
+        description={article?.content?.replace(/<[^>]*>?/gm, '').slice(0, 300) ?? ""} 
+        image={article?.featuredImage?.node?.sourceUrl ?? ""} 
+      />
       {(article) && <div className='section-container'>
         <div className={clsx('article-header', headerOver && "hover" )} style={{backgroundImage: article?.featuredImage ? `url(${article.featuredImage.node.sourceUrl})` : ''}}>
           <div {...props} className='article-header-background'/>

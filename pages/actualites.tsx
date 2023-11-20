@@ -8,6 +8,7 @@ import ArticleCarousel from '../components/app-components/ArticleCarousel/Articl
 import { useAtomValue } from 'jotai'
 import ParishList from '../lib/parish'
 import { parish } from '../lib/atom'
+import CustomHead from '../components/app-components/CustomHead'
 
 type INewsPage = {
   articles: IArticleItem[]
@@ -67,6 +68,7 @@ export default function NewsPage({articles} : INewsPage) {
 
   return (
     <div>
+      <CustomHead title={"Actualités"} description="Retrouvez toutes les actualités de votre paroisse."/>
       {(headArticles && headArticles.length !== 0) && <div className="section-container">
         <ArticleCarousel articles={headArticles}/>
       </div>}

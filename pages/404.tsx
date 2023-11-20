@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {useState, useEffect} from 'react'
 import Button from '../components/app-components/Button/Button';
+import CustomHead from '../components/app-components/CustomHead';
 
 type IErrorPage = {
   
@@ -21,6 +22,7 @@ export default function ErrorPage({} : IErrorPage) {
   }, []);
   return (
     <div>
+      <CustomHead title={"Page non trouvée"} description="Cette page ou article n'a pas pu être trouvé."/>
       <div className="section-container error-container">
         <div>
           <h2>Erreur 404</h2>

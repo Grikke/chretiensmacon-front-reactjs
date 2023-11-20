@@ -6,6 +6,7 @@ import { useAtomValue } from 'jotai'
 import { parish } from '../lib/atom'
 import { getSchedules, IScheduleItem } from '../lib/informations'
 import ScheduleCalendar from '../components/app-components/ScheduleCalendar/ScheduleCalendar'
+import CustomHead from '../components/app-components/CustomHead'
 
 type ISchedulesPage = {
   schedules: IScheduleItem[]
@@ -13,18 +14,13 @@ type ISchedulesPage = {
 
 
 export default function NewsPage({schedules} : ISchedulesPage) {
-  const [hydrated, setHydrated] = useState(false)
   const activeParish = useAtomValue(parish)
   const [mainSchedules] = useState(schedules.filter(schedule => !schedule?.schedulePost?.seasonal))
   const [seasonalSchedules] = useState(schedules.filter(schedule => schedule?.schedulePost?.seasonal))
-  useEffect(() => {
-      setHydrated(true);
-  }, []);
-
-  if (!hydrated) return null
 
   return (
     <div>
+      <CustomHead title={"Horaires"} description="Horaires des messes et offices de la paroisse."/>
       <div className="section-container main-schedule">
         {mainSchedules.map((schedule, index) => (<div key={index} className="schedule-item">
           <h2 className="schedule-title">{schedule.title}</h2>
