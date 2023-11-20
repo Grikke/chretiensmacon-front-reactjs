@@ -15,7 +15,7 @@ export default function YouthDirectoryPage({directories} : IDirectoryPage) {
   return (
     <div>
       <div className="section-container">
-        <h2>Annuaire des Mouvements Jeunesses</h2>
+        <h2>Annuaire des Mouvements et Associations</h2>
         <div className="page-container">
           <div className="directories-list">
             {directories.map((dir) => (
@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     if (!data?.directories?.nodes)
       return { notFound: true }
     return addApolloState(client, {
-      props: { pageType: 'infopage', directories: data?.directories?.nodes.filter((dir: IDirectoryItem) => dir?.annuaryPost?.type === "youth") },
+      props: { pageType: 'infopage', directories: data?.directories?.nodes.filter((dir: IDirectoryItem) => dir?.annuaryPost?.type === "movement") },
     })
   } catch (e) {
     console.error(e)

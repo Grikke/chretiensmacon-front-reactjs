@@ -54,7 +54,6 @@ const ScheduleCalendar = (
       'sunday'
     ]
     let date = new Date()
-    console.log(date.getDay())
     return (
       <div className="calendar-schedule">
         <div className="calendar-week">

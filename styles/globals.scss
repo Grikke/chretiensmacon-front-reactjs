@@ -8,6 +8,7 @@
 @import './components/button.scss';
 @import './components/informations.scss';
 @import './components/map.scss';
+@import './components/search.scss';
 @import './components/schedule.scss';
 @import './components/article.scss';
 @import './components/carousel.scss';
@@ -55,6 +56,27 @@ a {
   & img {
     max-width: 100%;
     height: auto;
+  }
+}
+
+.loader-animation {
+  img {
+    display: block;
+    margin: auto;
+    animation-name: loader-spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+@keyframes loader-spin {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
   }
 }
 
@@ -204,10 +226,12 @@ header {
     .cls-1{
       isolation:isolate;
     }.cls-2,.cls-5{
+      transition: .9s all linear;
       fill:#fff;
     }.cls-2,.cls-3{
       stroke:#000;stroke-miterlimit:10;
     }.cls-3{
+      transition: .2s all linear;
       fill:#e20909;
     }.cls-4{
       opacity:0.5;
@@ -234,8 +258,11 @@ header {
       margin: auto;
       height: 100%;
     }
-    .cls-1{isolation:isolate;}.cls-2,.cls-5{fill:#fff;}.cls-2,.cls-3{stroke:#000;stroke-miterlimit:10;}.cls-3{fill:#e20909;}.cls-4{opacity:0.5;mix-blend-mode:screen;}.cls-5{font-size:32.36px;font-family:MyriadPro-Bold, Myriad Pro;font-weight:700;}.cls-6{letter-spacing:0em;}.cls-7{letter-spacing:0em;}.cls-8{letter-spacing:-0.02em;}.cls-9{letter-spacing:-0.03em;}
+    .cls-1{isolation:isolate;}.cls-2,.cls-5{transition: .9s all linear; fill:#fff;}.cls-2,.cls-3{transition: .2s all linear; stroke:#000;stroke-miterlimit:10;}.cls-3{fill:#e20909;}.cls-4{opacity:0.5;mix-blend-mode:screen;}.cls-5{font-size:32.36px;font-family:MyriadPro-Bold, Myriad Pro;font-weight:700;}.cls-6{letter-spacing:0em;}.cls-7{letter-spacing:0em;}.cls-8{letter-spacing:-0.02em;}.cls-9{letter-spacing:-0.03em;}
   }
+  position: sticky;
+  top: 0px;
+  z-index: 20;
   height: 90px;
   background-color: transparentize($primary-05, 0.1);
   display: flex;
@@ -373,6 +400,9 @@ header {
   }
   header {
     height: 60px;
+    position: sticky;
+    top: 0px;
+    z-index: 20;
     .menu-mobile-button {
       display: flex;
       flex-direction: row;
@@ -430,6 +460,9 @@ header {
   }
   header {
     height: 60px;
+    position: sticky;
+    top: 0px;
+    z-index: 20;
     .nav-container {
       display: none !important;
     }

@@ -132,6 +132,11 @@
   .page-button {
     flex: 1;
     .page-event-button {
+      &.active {
+        background-color: $primary-04;
+        color: white;
+        border-color: white;
+      }
       cursor: pointer;
       background-color: transparentize($grey-01, 0.4);
       width: 32px;

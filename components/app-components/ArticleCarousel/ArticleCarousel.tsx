@@ -5,6 +5,8 @@ import Link from 'next/link';
 
 
 import "react-multi-carousel/lib/styles.css";
+import { useSetAtom } from 'jotai';
+import { loading } from '../../../lib/atom';
 
 export type IArticle = {
   articles: IArticleItem[]
@@ -21,6 +23,7 @@ const ArticleCarousel = (
   (
     {articles} : IArticle
   ) => {
+    const setLoading = useSetAtom(loading)
     return (
       <Carousel containerClass="carousel-container" sliderClass='carousel-container' autoPlay={articles.length < 1} autoPlaySpeed={5000} infinite={true} responsive={responsive}>
         {articles.slice(0, 10).map(article => (
@@ -37,7 +40,7 @@ const ArticleCarousel = (
             <div className="carousel-filter" />
             <div className="carousel-title">{article.title}</div>
             <div className="carousel-button-container">
-            <Link href={`/articles/${article.slug}`}>
+            <Link onClick={() => setLoading(true)} href={`/articles/${article.slug}`}>
               <Button variant='primary' className="carousel-button" size={"lg"}>
                   En savoir plus
               </Button>

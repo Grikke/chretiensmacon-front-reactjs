@@ -1,0 +1,43 @@
+.search-container {
+  position: relative;
+  display: block;
+  background-color: $primary-04;
+  color: $grey-01;
+  border-radius: 10px;
+  border: 2px solid $grey-01;
+  margin: auto;
+  margin-top: 20px;
+  padding-right: 40px;
+  width: max-content;
+  .search-input {
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: $grey-01;
+      opacity: 1;
+    }
+    padding-left: 10px;
+    font-family: 'Montserrat';
+    height: 40px;
+    background-color: transparent;
+    border: transparent;
+    border-radius: 10px;
+    color: $grey-01;
+    font-size: large;
+  }
+  .search-icon {
+    &:hover {
+      margin-top: 8px;
+      height: 23px;
+    }
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    margin-top: 6px;
+    height: 25px;
+    transition: .21s all linear;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}

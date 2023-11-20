@@ -1,26 +1,17 @@
 import { GetStaticProps } from 'next'
 
 import { getArticles, IArticleItem } from '../lib/articles'
-import { addApolloState, initializeApollo } from '../lib/appolo'
+import { addApolloState, initializeApollo } from '../../lib/appolo'
 import {useState, useEffect} from 'react'
-import { getSacrementPages, IPageItem } from '../lib/informations'
+import { getSacrementPages, IPageItem } from '../../lib/informations'
 import Link from 'next/link'
-import CustomHead from '../components/app-components/CustomHead'
+import CustomHead from '../../components/app-components/CustomHead'
 
 type IInformationPage = {
   pages: IPageItem[]
 }
 
 export default function SacrementPage({pages} : IInformationPage) {
-  const [hydrated, setHydrated] = useState(false);
-  console.log(pages)
-    useEffect(() => {
-      setHydrated(true);
-    }, []);
-    if (!hydrated) {
-        // Returns null on first render, so the client and server match
-        return null;
-    }
   return (
     <div>
       <CustomHead title={"Sacrements"} description="Informations sur les sacrements catholiques."/>
@@ -45,7 +36,6 @@ export const getStaticProps: GetStaticProps = async () => {
     //Initialize Apollo Client for SSR
     const client = initializeApollo()
     const { data } = await client.query({ query: getSacrementPages })
-    console.log(data)
     if (!data?.pages?.nodes)
       return { notFound: true }
     return addApolloState(client, {

@@ -5,19 +5,21 @@ import clsx from 'clsx'
 
 import Logo from '../LogoIcon'
 import ParishList from '../../../lib/parish'
-import { parish } from '../../../lib/atom'
-import { useAtom } from 'jotai'
+import { loading, parish } from '../../../lib/atom'
+import { useAtom, useSetAtom } from 'jotai'
+import { useRouter } from 'next/router'
 
 const Header = () => {
   const [showMenu, toggleMenu] = useState(false)
   const [activeParish] = useAtom(parish)
+  const setLoading = useSetAtom(loading)  
   const path: {[key: string]: string} = {
     '/': 'Accueil',
     '/actualites': 'Actualités',
-    '/sacrements': 'Sacrements',
-    '/informations': 'Informations',
+    '/services': 'Services',
     '/horaires': 'Horaires'
   }
+  const router = useRouter()
   const parishTarget: {[key: string] : {
     title: string
     img?: StaticImageData
@@ -46,7 +48,7 @@ const Header = () => {
             {activeParish && <div className='nav-container'>
               {Object.keys(path).map(val => (
                 <div key={val}>
-                  <Link className='nav-link' href={val}>
+                  <Link onClick={() => router.asPath !== val && setLoading(true)} className='nav-link' href={val}>
                     {path[val]}
                   </Link>
                 </div>
@@ -58,7 +60,11 @@ const Header = () => {
       {activeParish && <div className='nav-mobile-container' style={{opacity: showMenu ? 1 : 0, pointerEvents: showMenu ? 'all' : 'none'}}>
         {Object.keys(path).map(val => (
           <div key={val}>
-            <Link onClick={() => toggleMenu(false)} className='nav-link' href={val}>
+            <Link onClick={() => {
+              if (router.asPath !== val)
+                setLoading(true)
+              toggleMenu(false)
+            }} className='nav-link' href={val}>
               {path[val]}
             </Link>
           </div>

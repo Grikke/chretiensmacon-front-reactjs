@@ -22,6 +22,7 @@
     font-family: 'Montserrat';
   }
   & .target-button {
+    border: 1px solid $primary-04;
     &:hover {
       box-shadow: 0 0 0 transparent;
       color:transparentize(white, 0.5);
@@ -137,7 +138,8 @@
   .target-info {
     background-color: transparentize(#912d2d, 0.1);
     width: 80%;
-    position: static;
+    position: sticky;
+    top: 1px;
     display: block;
     margin: auto;
     margin-bottom: 40px;
@@ -155,10 +157,10 @@
     }
   }
   .map-container {
-    width: 164%;
+    width: 164vw;
     margin-left: -40%;
     .map-svg {
-      width: 220vw;
+      width: 216vw;
     }
   }
 }

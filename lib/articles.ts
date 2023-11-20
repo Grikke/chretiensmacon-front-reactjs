@@ -28,9 +28,65 @@ export type IArticleItem = {
   slug: string
 }
 
+export type IPageItem = {
+  title: string
+  featuredImage: {
+    node: {
+      altText: string
+      sourceUrl: string
+    }
+  }
+  content?: string
+  author: {
+    node: {
+      name: string
+    }
+  }
+  parent?: {
+    node?: {
+      uri?: string
+    }
+  }
+  date: string
+  slug: string
+}
+
 export const getArticles = gql`
   query getArticles {
-    posts(first: 500) {
+    posts(first: 70) {
+      nodes {
+        acfPriorities {
+          expirationDate
+          headline
+        }
+        categories {
+          nodes {
+            name
+            slug
+          }
+        }
+        title
+        featuredImage {
+          node {
+            altText
+            sourceUrl
+          }
+        }
+        author {
+          node {
+            name
+          }
+        }
+        date
+        slug
+      }
+    }
+  }
+`
+
+export const searchArticles = gql`
+  query searchArticles($search: String!) {
+    posts(first: 20, where: { search: $search}) {
       nodes {
         acfPriorities {
           expirationDate

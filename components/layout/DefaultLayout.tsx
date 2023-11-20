@@ -1,7 +1,6 @@
 import Head from 'next/head'
-import styles from '../../styles/Home.module.css'
-import { useAtom } from 'jotai'
-import { parish } from '../../lib/atom'
+import { useAtom, useSetAtom } from 'jotai'
+import { loading, parish } from '../../lib/atom'
 
 import { ReactNode, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -12,7 +11,12 @@ import Footer from '../app-components/Footer'
 export default function DefaultLayout({children} : {children: ReactNode}) {
   const [activeParish, setActiveParish] = useAtom(parish)
   const [showMenu, toggleMenu] = useState(false)
+  const setLoading = useSetAtom(loading)
   const router = useRouter()
+
+  useEffect(() => {
+    setLoading(false)
+  }, [router.route, router.asPath])
 
   useEffect(() => {
     if (localStorage.getItem('parish'))
@@ -31,7 +35,7 @@ export default function DefaultLayout({children} : {children: ReactNode}) {
   }, [activeParish])
   
   return (
-    <div className={styles.container}>
+    <div className={"body-container"}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

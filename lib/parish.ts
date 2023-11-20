@@ -19,7 +19,7 @@ export default  {
     phone: '03 85 34 23 39',
     mail: 'paroissestvincentdepaul@wanadoo.fr',
     address: '131, impasse de l’Eglise|71000 Mâcon',
-    description: 'Paroisse Saint Vincent de Paul',
+    description: 'Unissant les quatres communes du Nord du Mâconnais, Hurigny, Sennecé, Laizé et Sancé.',
     button: {
       title: 'Visiter la paroisse',
     }

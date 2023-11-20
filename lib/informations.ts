@@ -94,7 +94,7 @@ export type IDirectoryItem = {
 
 export const getDirectories = gql`
 query getDirectories {
-  directories {
+  directories(first: 400) {
     nodes {
       title
       annuaryPost {
@@ -153,6 +153,33 @@ export const findArticle = gql`
       }
       date
       slug
+    }
+  }
+`
+
+export const findSacramentPage = gql`
+  query findArticle($slug: ID!) {
+    page(idType: URI, id: $slug) {
+      content
+      title
+      featuredImage {
+        node {
+          altText
+          sourceUrl
+        }
+      }
+      author {
+        node {
+          name
+        }
+      }
+      date
+      slug
+      parent {
+        node {
+          uri
+        }
+      }
     }
   }
 `

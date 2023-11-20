@@ -1,10 +1,13 @@
 .directories-list {
   display: flex;
   flex: 1;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  height: 100%;
   .directory-container {
     position: relative;
     display: flex;
-    flex: 0.5;
+    flex: 1 0 33%;
     margin: 2px;
     padding-left: 15px;
     flex-direction: column;
@@ -13,12 +16,16 @@
     padding-right: 15px;
     padding-bottom: 15px;
     font-family: 'Montserrat';
-    height: min-content;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin-bottom: 20px;
 
     background-size: cover;
     background-position: center;
+    .directory-content {
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      z-index: 2;
+    }
     .background-directory {
       width: 100%;
       position: absolute;
@@ -47,7 +54,6 @@
       font-weight: bold;
       padding-top: 10px;
       flex: 1;
-      z-index: 2;
     }
     .directory-contact {
       padding-bottom: 5px;

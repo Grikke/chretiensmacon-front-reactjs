@@ -6,19 +6,23 @@ import VineyardMap from './Vineyard'
 
 import Image, { StaticImageData } from 'next/image'
 import Church from './Church'
-import { useAtom } from 'jotai'
-import { parish } from '../../../lib/atom'
+import { useAtom, useSetAtom } from 'jotai'
+import { loading, parish } from '../../../lib/atom'
 
 import ParishList from '../../../lib/parish'
 import { useRouter } from 'next/router'
+import { useMediaQuery } from 'react-responsive'
 
 
 export type IMap = {}
 
 const Map = forwardRef<IMap>(({}) => {
   const [activeParish, setActiveParish] = useAtom(parish)
+  const setLoading = useSetAtom(loading)
   const [selectedTarget, selectTarget] = useState<string | null>(activeParish)
   const router = useRouter()
+
+  const isLargeMap = useMediaQuery({ query: '(max-width: 1100px)' })
 
   const parishTarget: {[key: string] : {
     title: string
@@ -45,23 +49,6 @@ const Map = forwardRef<IMap>(({}) => {
           xmlSpace="preserve">
         <path className="st0" d="M35.95,9.17h813.83c9.68,0,17.52,7.85,17.52,17.52v527.39c0,9.68-7.85,17.52-17.52,17.52H35.95
           c-9.68,0-17.52-7.85-17.52-17.52V26.7C18.43,17.02,26.27,9.17,35.95,9.17z"/>
-        <path id="path1695_1_" vector-effect="none" className="st1" d="M592.67,237.44l0.46-0.06l0.09,0.05l0.06,0.14l-0.04,0.14l-0.26,0.43
-          l0.12,0.35l0.37,0.57l0.06,0.17l0.1,0.25l0.19,0.24l0.38,0.33l0.17,0.09l0.38,0.05l0.07,0.07l0.07,0.32l0.04,0.1l0.1,0.25l0.04,0.55
-          l0.09,0.25l0.5,0.55l0.04,0.11l0.07,0.2l0.26,0.15l0.03,0.06l-0.02,0.36l0.08,0.08l0.33,0.08l0.17,0.15l0.3,0.12l0.46,0.11
-          l0.28,0.15l0.17,0.18l0.23,0.39l0.25,0.12l0.23,0.22l0.13,0.06l0.07-0.02l0.09-0.07l0.1-0.19l0.12-0.22l0.11-0.42l0.07-0.11
-          l0.2-0.04l0.75,0.15l0.35-0.06l0.35,0.05l0.2-0.02l0.14,0.07l0.09,0.14l0.63,0.85l0.14,0.13l0.57,0.39l1.5,0.89l0.73,0.54l0.54,0.17
-          l0.8,0.39l0.44,0.17l1.2,0.31l0.15,0.01l0.6-0.14h0.56h0.18h0.01l0.23-0.04l0.46-0.3l0.3-0.1l0.3-0.05l0.17,0.01l0.28,0.02
-          l0.47-0.02l0.23-0.01l0.38-0.09l0.25,0.05l1.11,0.47l0.41,0.25l0.46,0.13l0.31,0.15l0.15,0.02l0.37-0.11l0.38-0.01l0.06-0.03
-          l0.22-0.32l0.14-0.4l0.11-0.15l0.33-0.28l0.04-0.09l0.01-0.19l-0.08-0.27l-0.17-0.19l-0.01-0.09l-0.15-0.19l0.01-0.59l-0.14-1.65
-          l-0.33-1.47l-0.2-0.88l-0.06-0.15l-0.12-0.12l-0.07,0.01l-0.49,0.27l-0.06-0.15l-0.2-0.12l-0.02-0.1l0.52-2.33l-0.49-1.76
-          l-0.05-0.02l-0.57,0.1l-0.14-0.01l-1.21-0.28l-0.05-0.04l-0.19-1.09l-0.18-0.37l0.4-0.25l0.02-0.04l-0.52-1.48l0.02-0.1l-0.39-0.44
-          l0.1-0.06l-0.32-0.59v-0.07l0.85-0.45l0.04-0.05l0.01,0.02l1.22-0.6l1.04-0.43l0.06,0.01l0.1-0.06l0.14-0.07l0.03,0.01l0.57-0.22
-          l1.45-0.69l0.12,0.14l2.05-0.65l1.22-0.32l0.15-0.12l1.39-1.43l0.02-0.08l2.23-1.05l-0.38-0.14l-0.21-0.07l-0.25-0.06l-0.23-0.05
-          v-0.04l-0.03,0.02l-0.39-0.14l-0.21-0.11l-0.28-0.15l-0.64-0.37l-1.37-1.09l-0.33-0.15l-1.46-0.2l-1.07,0.1l-1.48-0.12l-0.64,0.04
-          l-0.19,0.04l-0.57,0.3l-1.31,0.54l-0.3,0.06l-0.84,0.03l-0.06,0.02l-0.5-0.03l-0.57-0.09l-5.55,0.3l-0.91,0.09l-0.81,0.14
-          l-1.33,0.31l0.05,0.59l-0.01,0.35l-0.19,1.12l-0.02,0.01l-0.34,2.03l-0.04,0.06l-2.99,1.28l-0.63,0.36l0.02,0.07l1.13,1.22
-          l0.23,0.31l-0.02,0.09l-1.82,2.51l-0.04,0.12l-0.47,0.18l-0.14,0.08l-0.01,0.12l-0.27,0.46l-0.05,0.04l-2.31-0.99l-0.64,1.67
-          l-0.07,0.06l-0.81,0.3L592.67,237.44"/>
         <path id="path1749_1_" vector-effect="none" className="st2" d="M412.42,222.02l-0.08,0.2l-0.42,1.09l-0.17,0.45l-0.19,0.49l-0.24,0.62
           l-0.46,1.2l-0.02,0.06l-0.31,0.78l-0.13,0.31l-0.4,1.04l0.42-0.2l0.54-0.26l0.31,0.12l0.64,0.23l0.65,0.24l0.31,0.12l0.3,0.11
           l0.19,0.07l0.16,0.06l1.29,0.48l0.39,0.14l0.33,0.11l0.51,0.17l0.17,0.06l0.33,0.11l0.73,0.25l0.19,0.07l0.64,0.22l0.7,0.23
@@ -2764,7 +2751,7 @@ const Map = forwardRef<IMap>(({}) => {
           <Church coordinates={'https://goo.gl/maps/iz9f8ubHU4zppudV7'} show={showEstienne} name="Sainte Madeleine" x="356.07" y="261.99" reverse={true}/>
         </g>
         <g style={{transition: '.21s all linear'}}>
-          <Church coordinates={'https://goo.gl/maps/A9nmBeGJMNs8ucgu9'} show={showVincent} name="Notre Dame de la Paix" x="428.07" y="181.99"/>
+          <Church coordinates={'https://goo.gl/maps/A9nmBeGJMNs8ucgu9'} show={showVincent} name={isLargeMap ? "N-D de la Paix" : "Notre Dame de la Paix"} x="428.07" y="181.99"/>
           <Church coordinates={'https://goo.gl/maps/CRHHV8XtaZRyQhEUA'} show={showVincent} name="Sancé" x="431.07" y="151.99"/>
           <Church coordinates={'https://goo.gl/maps/g5JGNr42zLqJBnme6'} show={showVincent} name="Sennecé" x="431.07" y="105.99"/>
           <Church coordinates={'https://goo.gl/maps/ojdnvtNMRDX3tros8'} show={showVincent} name="Flacé" x="371.07" y="164.99" reverse={true}/>
@@ -2779,6 +2766,7 @@ const Map = forwardRef<IMap>(({}) => {
         <div className="description">{selectedParish.description}</div>
         <Button className="target-button" variant='primary' onClick={selectedParish.button.event ? selectedParish.button.event : () => { 
           setActiveParish(selectedTarget)
+          setLoading(true)
           router.replace('/actualites')
         }}>
           {selectedParish.button?.title}
