@@ -23,6 +23,7 @@ const Map = forwardRef<IMap>(({}) => {
   const router = useRouter()
 
   const isLargeMap = useMediaQuery({ query: '(max-width: 1100px)' })
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   const parishTarget: {[key: string] : {
     title: string
@@ -37,6 +38,7 @@ const Map = forwardRef<IMap>(({}) => {
   const showEstienne = useMemo(() => selectedTarget === 'estienne', [selectedTarget])
   const showVincent = useMemo(() => selectedTarget === 'vincent', [selectedTarget])
   const showVineyard = useMemo(() => selectedTarget === 'vineyard', [selectedTarget])
+  const viewBoxSize = useMemo(() => isLargeMap && !isMobile ? '300 0 88.33 596.05' : (isMobile ? '325 0 88.33 756.05' : '0 0 888.33 596.05'), [isLargeMap])
   useEffect(() => {
     router.prefetch('/actualites')
   }, [])
@@ -45,7 +47,7 @@ const Map = forwardRef<IMap>(({}) => {
     <>
       <div className="map-container">
         <svg className="map-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-          width="888.33px" height="596.05px" viewBox="0 0 888.33 596.05"
+          width="888.33px" height="596.05px" viewBox={viewBoxSize}
           xmlSpace="preserve">
         <path className="st0" d="M35.95,9.17h813.83c9.68,0,17.52,7.85,17.52,17.52v527.39c0,9.68-7.85,17.52-17.52,17.52H35.95
           c-9.68,0-17.52-7.85-17.52-17.52V26.7C18.43,17.02,26.27,9.17,35.95,9.17z"/>
@@ -2760,18 +2762,18 @@ const Map = forwardRef<IMap>(({}) => {
         </g>
         </svg>
       </div>
-      {selectedParish && <div className="target-info">
+      <div className="target-info" style={{visibility: selectedParish ? 'visible' : 'hidden'}}>
         {selectedParish?.img && <Image className="image-background" src={selectedParish?.img} alt="Photo d'une église de la paroisse"/>}
-        <div className='title'>{selectedParish.title}</div>
-        <div className="description">{selectedParish.description}</div>
-        <Button className="target-button" variant='primary' onClick={selectedParish.button.event ? selectedParish.button.event : () => { 
+        <div className='title'>{selectedParish?.title}</div>
+        <div className="description">{selectedParish?.description}</div>
+        <Button className="target-button" variant='primary' onClick={selectedParish?.button.event ? selectedParish.button.event : () => { 
           setActiveParish(selectedTarget)
           setLoading(true)
           router.replace('/actualites')
         }}>
-          {selectedParish.button?.title}
+          {selectedParish?.button?.title}
         </Button>
-      </div>}
+      </div>
     </>
     )
   }

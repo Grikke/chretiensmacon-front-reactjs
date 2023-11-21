@@ -1,6 +1,9 @@
+
 .target-info {
   position: absolute;
-  bottom: 50px;
+  bottom: 50%;
+  top: 50%;
+  height: max-content;
   right: 100px;
   display: flex;
   flex-direction: column;
@@ -68,7 +71,6 @@
   width: 95%;
   height: fit-content;
   margin: auto;
-  enable-background:new 0 0 888.33 596.05;
   position: relative;
   .church-svg {
     &:hover {
@@ -139,7 +141,7 @@
     background-color: transparentize(#912d2d, 0.1);
     width: 80%;
     position: sticky;
-    top: 1px;
+    bottom: 0px;
     display: block;
     margin: auto;
     margin-bottom: 40px;
@@ -157,10 +159,10 @@
     }
   }
   .map-container {
-    width: 164vw;
-    margin-left: -40%;
-    .map-svg {
-      width: 216vw;
+    height: 90vh;
+    margin-bottom: -20vh;
+    .map-svg  {
+      height: 100%;
     }
   }
 }

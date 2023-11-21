@@ -31,7 +31,7 @@ const Header = () => {
   }} = ParishList
 
   return (
-    <>
+    <div className="header-overall">
       <header className={clsx(activeParish && "parish")} style={{backgroundImage: activeParish ?`url(
         ${parishTarget?.[activeParish]?.img ? parishTarget?.[activeParish]?.img?.src : ""
       })` : ''}}>
@@ -57,7 +57,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      {activeParish && <div className='nav-mobile-container' style={{opacity: showMenu ? 1 : 0, pointerEvents: showMenu ? 'all' : 'none'}}>
+      {activeParish && <div className='nav-mobile-container' style={{opacity: showMenu ? 1 : 0, display: showMenu ? '' : 'none' , pointerEvents: showMenu ? 'all' : 'none'}}>
         {Object.keys(path).map(val => (
           <div key={val}>
             <Link onClick={() => {
@@ -70,7 +70,7 @@ const Header = () => {
           </div>
         ))}
       </div>}
-    </>
+    </div>
   )
 }
 

@@ -126,6 +126,24 @@
   .schedule-item {
     .calendar-schedule {
         .calendar-week {
+          .day-item {
+            &.day-today {
+              border-right: 3px solid white;
+            }
+            border-right: 1px solid white;
+            &:first-child {
+              .day-name {
+                border-top-left-radius: 0px;
+              }
+              border-top-left-radius: 0px;
+            }
+            &:last-child {
+              .day-name {
+              border-top-right-radius: 0px;
+              }
+              border-top-right-radius: 0px;
+            }
+          }
           flex-direction: column !important;
         }
     }
