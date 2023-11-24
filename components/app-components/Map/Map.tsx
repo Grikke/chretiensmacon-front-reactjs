@@ -38,7 +38,7 @@ const Map = forwardRef<IMap>(({}) => {
   const showEstienne = useMemo(() => selectedTarget === 'estienne', [selectedTarget])
   const showVincent = useMemo(() => selectedTarget === 'vincent', [selectedTarget])
   const showVineyard = useMemo(() => selectedTarget === 'vineyard', [selectedTarget])
-  const viewBoxSize = useMemo(() => isLargeMap && !isMobile ? '300 0 88.33 596.05' : (isMobile ? '325 0 88.33 756.05' : '0 0 888.33 596.05'), [isLargeMap])
+  const viewBoxSize = useMemo(() => isLargeMap && !isMobile ? '300 0 88.33 596.05' : (isMobile ? '325 0 88.33 756.05' : '0 0 888.33 596.05'), [isLargeMap, isMobile])
   useEffect(() => {
     router.prefetch('/actualites')
   }, [])

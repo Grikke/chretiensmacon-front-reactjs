@@ -216,8 +216,10 @@ footer a {
 
 .header-overall {
   position: sticky;
+  overflow: hidden;
   top: 0px;
   z-index: 50;
+  max-width: 100vw;
 }
 
 header {
