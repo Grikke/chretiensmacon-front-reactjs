@@ -6,6 +6,7 @@ import {useState, useEffect} from 'react'
 import { getDirectories, getPages, IDirectoryItem, IPageItem } from '../../lib/informations'
 import Link from 'next/link'
 import DirectoryItem from '../../components/app-components/DirectoryItem/DirectoryItem'
+import CustomHead from '../../components/app-components/CustomHead'
 
 type IDirectoryPage = {
   directories: IDirectoryItem[]
@@ -14,6 +15,7 @@ type IDirectoryPage = {
 export default function YouthDirectoryPage({directories} : IDirectoryPage) {
   return (
     <div>
+      <CustomHead title={"Annuaire des Équipes Pastorales"} description="Annuaire des Équipes Pastorales Chrétiennes de Mâcon."/>
       <div className="section-container">
         <h2>Annuaire du Doyenné</h2>
         <div className="page-container">

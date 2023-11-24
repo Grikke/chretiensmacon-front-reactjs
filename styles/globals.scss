@@ -127,6 +127,7 @@ a {
 
 .main-container > div {
   width: 100%;
+  overflow: hidden;
   backdrop-filter: blur(2px);
   display: flex;
   flex-direction: column;
@@ -292,6 +293,7 @@ header {
       margin-right: 10px;
     }
     & > span {
+      overflow: hidden;
       flex: 1;
       transition: .31s all linear;
       font-size: 45px;

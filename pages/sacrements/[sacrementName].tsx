@@ -8,6 +8,7 @@ import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { findSacramentPage } from '../../lib/informations'
+import CustomHead from '../../components/app-components/CustomHead'
 
 
 //Initialize Apollo Client for SSR
@@ -16,10 +17,10 @@ const client = initializeApollo()
 export default function SacrementInfoPage({sacrement}: {sacrement: IPageItem}) {
   const {query} = useRouter()
   useEffect(() => {}, [query])
-  const [headerOver, setHeaderOver] = useState(false)
   return (
     <div>
       {sacrement && <div className='section-container'>
+        <CustomHead title={sacrement?.title} description={sacrement?.content?.replace(/<[^>]*>?/gm, '').slice(0, 300) ?? ""}/>
         <h1>{sacrement?.title}</h1>
         <div className="article-content" dangerouslySetInnerHTML={{ __html: sacrement?.content ?? "" }} />
       </div>}
@@ -45,7 +46,6 @@ export const getServerSideProps: GetServerSideProps<{
       variables: {slug: sacrementName},
       context: { target: 'prestashop' },
     })
-    console.log(data?.page)
     if (data?.page === null || !data?.page?.parent?.node?.uri?.includes('sacrements')) {
         return { notFound: true }
     }

@@ -86,7 +86,7 @@ export const getArticles = gql`
 
 export const searchArticles = gql`
   query searchArticles($search: String!) {
-    posts(first: 20, where: { search: $search}) {
+    posts(first: 6, where: { search: $search}) {
       nodes {
         acfPriorities {
           expirationDate

@@ -1,9 +1,3 @@
-import { GetStaticProps } from 'next'
-
-import { getArticles, IArticleItem } from '../../lib/articles'
-import { addApolloState, initializeApollo } from '../../lib/appolo'
-import {useState, useEffect} from 'react'
-import { getPages, IPageItem } from '../../lib/informations'
 import Link from 'next/link'
 import CustomHead from '../../components/app-components/CustomHead'
 import { useSetAtom } from 'jotai'
@@ -43,16 +37,6 @@ export default function ServicesPage() {
           <Link onClick={() => setLoading(true)} href={`/sacrements`} className="page-item">
             <div className="title">
               Sacrements
-            </div>
-          </Link>
-          <Link onClick={() => setLoading(true)} href={`/services/mouvements`} className="page-item">
-            <div className="title">
-              Associations
-            </div>
-          </Link>
-          <Link onClick={() => setLoading(true)} href={`/services/equipe`} className="page-item">
-            <div className="title">
-              Équipe Paroissiale
             </div>
           </Link>
         </div>

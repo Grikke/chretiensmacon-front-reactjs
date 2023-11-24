@@ -81,10 +81,6 @@ export default function NewsPage({articles} : INewsPage) {
     setSearchData(data?.posts?.nodes)
   }
 
-  useEffect(() => {
-    console.log(pagination / nbPage)
-  }, [pagination])
-
   const pageNumber = useMemo(() => 
     new Array(Math.ceil(commonArticles.length / nbPage)).fill('').flat()
   , [commonArticles])
