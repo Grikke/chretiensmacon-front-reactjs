@@ -102,7 +102,7 @@ export default function NewsPage({articles} : INewsPage) {
           <input type="submit" style={{display:'none'}}/>
         </form>
         {loadingSearch && <Loader/>}
-        {(searchData && searchData.length !== 0) && <div className="articles-container">
+        {(searchData && searchData.length !== 0 && !loadingSearch) && <div className="articles-container">
           {searchData?.map(article => (
             <ArticleItem key={article.slug} article={article}/>
           ))}
