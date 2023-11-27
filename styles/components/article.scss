@@ -165,6 +165,15 @@
 }
 
 .article-content {
+  & a {
+    color: $primary-05;
+    transition: .1s all linear;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+      color: $primary-04;
+    }
+  }
   & img {
     border-radius: 10px;
     display: block;

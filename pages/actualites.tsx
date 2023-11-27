@@ -42,10 +42,10 @@ export default function NewsPage({articles} : INewsPage) {
   const [pagination, setPagination] = useState(nbPage)
   const activeParish = useAtomValue(parish)
   const [search, setSearch] = useState('')
-  const [headArticles, setHeadArticles] = useState(articles.filter((article) => article.acfPriorities.headline))
+  const [headArticles, setHeadArticles] = useState(articles.filter((article) => article.acfPriorities.headline && (!article.acfPriorities.expirationDate || !hasExpired(article.acfPriorities.expirationDate)) ))
   const [commonArticles, setCommonArticles] = useState(articles.filter((article) => !article.acfPriorities.headline && !article.acfPriorities.expirationDate))
   const [hotArticles, setHotArticles] = useState(articles.filter((article) => 
-    article.acfPriorities.expirationDate && !hasExpired(article.acfPriorities.expirationDate)
+    article.acfPriorities.expirationDate && !hasExpired(article.acfPriorities.expirationDate) && !article.acfPriorities.headline
   ))
   const [loadingSearch, setLoadingSearch] = useState(false)
   const [searchData, setSearchData] = useState<IArticleItem[]>([])
@@ -53,6 +53,7 @@ export default function NewsPage({articles} : INewsPage) {
   useEffect(() => {
     if (activeParish && !hasFiltered) {
       setHasFiltered(true)
+      console.log(articles)
       setCommonArticles(
         commonArticles.filter(({categories}) => 
           !isParishRelated(categories) || categories.nodes.map(({slug}) => slug).includes(activeParish)
