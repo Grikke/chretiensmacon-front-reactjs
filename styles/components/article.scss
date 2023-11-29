@@ -63,6 +63,50 @@
   }
 }
 
+.category-nav {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  user-select: none;
+  overflow-x: scroll;
+  padding-left: 10px;
+  padding-right: 10px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .category-tab {
+    border-radius: 5px;
+    line-height: 1.25rem;
+    white-space: nowrap;
+    text-transform: capitalize;
+    transition: .2s all linear;
+    background-color: transparentize($primary-05, 0.2);
+    margin-right: 5px;
+    padding: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-family: 'Nova Cut';
+    width: max-content;
+    color: $grey-01;
+    border: 1px solid $grey-01;
+    cursor: pointer;
+    &:hover {
+      background-color: transparentize($primary-06, 0.2);
+    }
+    &.active {
+      &:hover {
+        background-color: transparentize($primary-05, 0.2);
+      }
+      background-color: $primary-04;
+      font-weight: bold;
+      color: white;
+    }
+  }
+}
+
 .section-container {
   .article-header {
     background-size: 100%;
@@ -141,7 +185,8 @@
       background-color: transparentize($grey-01, 0.4);
       width: 32px;
       height: 32px;
-      display: inline-flex;
+      display: flex;
+      margin: auto;
       font-family: 'Montserrat Alternates';
       color: $primary-04;
       font-weight: bold;
@@ -165,6 +210,9 @@
 }
 
 .article-content {
+  & iframe {
+    width: 100%;
+  }
   & a {
     color: $primary-05;
     transition: .1s all linear;

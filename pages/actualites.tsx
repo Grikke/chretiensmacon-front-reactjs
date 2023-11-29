@@ -12,6 +12,8 @@ import { searchArticles } from '../lib/articles'
 import CustomHead from '../components/app-components/CustomHead'
 import { useQuery } from '@apollo/client'
 import Loader from '../components/app-components/Loader/Loader'
+import { unique } from 'radash'
+import CategoryNav from '../components/app-components/CategoryNav'
 
 type INewsPage = {
   articles: IArticleItem[]
@@ -47,13 +49,15 @@ export default function NewsPage({articles} : INewsPage) {
   const [hotArticles, setHotArticles] = useState(articles.filter((article) => 
     article.acfPriorities.expirationDate && !hasExpired(article.acfPriorities.expirationDate) && !article.acfPriorities.headline
   ))
+  var categoriesList = unique(articles.map(({categories}) => categories.nodes).flat(), c => c.slug)
+  
+  const [filteredCategories, setFilteredCategories] = useState<string[]>(categoriesList.map(c => c.slug))
   const [loadingSearch, setLoadingSearch] = useState(false)
   const [searchData, setSearchData] = useState<IArticleItem[]>([])
 
   useEffect(() => {
     if (activeParish && !hasFiltered) {
       setHasFiltered(true)
-      console.log(articles)
       setCommonArticles(
         commonArticles.filter(({categories}) => 
           !isParishRelated(categories) || categories.nodes.map(({slug}) => slug).includes(activeParish)
@@ -71,6 +75,25 @@ export default function NewsPage({articles} : INewsPage) {
       )
     }
   }, [activeParish, commonArticles, headArticles, hotArticles])
+
+  useEffect(() => {
+    if (activeParish && filteredCategories.find(c => isParishRelated({nodes:[{slug: c}]}) && c !== activeParish))
+      setFilteredCategories(filteredCategories.filter((c) => !isParishRelated({nodes:[{slug: c}]}) || c === activeParish))
+  }, [activeParish])
+
+  useEffect(() => {
+    if (activeParish) {
+      setCommonArticles(articles
+        .filter((article) => !article.acfPriorities.headline && !article.acfPriorities.expirationDate)
+        .filter(({categories}) => 
+            !isParishRelated(categories) || categories.nodes.map(({slug}) => slug).includes(activeParish))
+        .filter(({categories}) => {
+
+          console.log(categories.nodes.map(({slug}) => slug).some(c => !filteredCategories.includes(c)))
+          return categories.nodes.map(({slug}) => slug).some(c => filteredCategories.includes(c))})
+      )
+    }
+  }, [filteredCategories, activeParish])
 
   const handleSearch = async() => {
     setLoadingSearch(true)
@@ -117,15 +140,20 @@ export default function NewsPage({articles} : INewsPage) {
           ))}
         </div>
       </div>}
-      {(commonArticles && commonArticles.length !== 0) && <div className="section-container">
+      {(activeParish) && <div className="section-container">
         <h2>Actualités paroissiales</h2>
+        <CategoryNav 
+          categories={categoriesList.filter(({slug}) => !isParishRelated({nodes:[{slug}]}) || slug === activeParish)}
+          activeCategories={filteredCategories} 
+          setActiveCategories={setFilteredCategories}
+        />
         <div className="articles-container">
-          {commonArticles.slice(pagination - nbPage, pagination).map(article => (
+          {(commonArticles && commonArticles.length !== 0) && commonArticles.slice(pagination - nbPage, pagination).map(article => (
             <ArticleItem key={article.slug} article={article}/>
           ))}
         </div>
         <div className="page-container">
-          {pageNumber.map((val, index) => (
+          {pageNumber.length !== 1 && pageNumber.map((val, index) => (
             <div key={index} className="page-button">
               <div className={`page-event-button ${pagination / nbPage === index + 1 ? 'active' : ''}`} onClick={() => setPagination(nbPage * (index + 1))}>
                 <div>{index + 1}</div>

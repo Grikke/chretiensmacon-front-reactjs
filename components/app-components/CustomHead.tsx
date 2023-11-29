@@ -20,13 +20,15 @@ const CustomHead = ({
   return (
     <Head>
       <title>{metaTitle}</title>
-      <meta name="theme-color" content="#752c2d"></meta>
+      <meta name="theme-color" content="#752c2d"/>
       <meta name="description" content={metaDescription} />
+      <meta name="og:site_name" content="Chrétiens Mâcon" key="og:site_name" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={metaUrl} />
       <meta property="og:title" content={metaTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:image" content={metaImage} />
+      <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={metaUrl} />
       <meta property="twitter:title" content={metaTitle} />
       <meta property="twitter:description" content={metaDescription} />
