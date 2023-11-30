@@ -9,7 +9,7 @@ export default function Home({} : IHomePage) {
     <div>
       <CustomHead/>
       <div className="section-container">
-        <h2>Paroisses Catholiques du Mâconnais</h2>
+        <h1>Paroisses Catholiques du Mâconnais</h1>
         <Map/>
       </div>
     </div>

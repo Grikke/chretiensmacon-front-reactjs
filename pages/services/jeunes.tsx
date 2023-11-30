@@ -17,7 +17,7 @@ export default function YouthDirectoryPage({directories} : IDirectoryPage) {
     <div>
       <div className="section-container">
         <CustomHead title={"Annuaire des Mouvements Jeunesses"} description="Annuaire des Mouvements Jeunesses Chrétiennes de Mâcon."/>
-        <h2>Annuaire des Mouvements Jeunesses</h2>
+        <h1>Annuaire des Mouvements Jeunesses</h1>
         <div className="page-container">
           <div className="directories-list">
             {directories.map((dir) => (
