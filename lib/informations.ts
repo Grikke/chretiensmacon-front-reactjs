@@ -93,23 +93,23 @@ export type IDirectoryItem = {
 }
 
 export const getDirectories = gql`
-query getDirectories {
-  directories(first: 400) {
-    nodes {
-      title
-      annuaryPost {
-        manager
-        type
-        description
-        contactPhone
-        contactEmail
-        avatar {
-          sourceUrl
+  query getDirectories {
+    directories(first: 400, where: {orderby: {field: TITLE, order: ASC}}) {
+      nodes {
+        title
+        annuaryPost {
+          manager
+          type
+          description
+          contactPhone
+          contactEmail
+          avatar {
+            sourceUrl
+          }
         }
       }
     }
   }
-}
 `
 
 export const getSacrementPages = gql`
@@ -157,8 +157,8 @@ export const findArticle = gql`
   }
 `
 
-export const findSacramentPage = gql`
-  query findArticle($slug: ID!) {
+export const findPage = gql`
+  query findPage($slug: ID!) {
     page(idType: URI, id: $slug) {
       content
       title

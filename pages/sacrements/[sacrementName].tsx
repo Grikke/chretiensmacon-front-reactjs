@@ -1,13 +1,10 @@
 import { GetServerSideProps } from 'next'
 
-import { getArticles, IArticleItem, IPageItem } from '../../lib/articles'
+import { IPageItem } from '../../lib/articles'
 import { addApolloState, initializeApollo } from '../../lib/appolo'
-import Loader from '../../components/app-components/Loader/Loader'
-import { useEffect, useMemo, useState } from 'react'
-import clsx from 'clsx'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
-import { findSacramentPage } from '../../lib/informations'
+import { findPage } from '../../lib/informations'
 import CustomHead from '../../components/app-components/CustomHead'
 
 
@@ -42,9 +39,8 @@ export const getServerSideProps: GetServerSideProps<{
 
   try {
     const {data} = await client.query<{page: IPageItem}>({
-      query: findSacramentPage,
+      query: findPage,
       variables: {slug: sacrementName},
-      context: { target: 'prestashop' },
     })
     if (data?.page === null || !data?.page?.parent?.node?.uri?.includes('sacrements')) {
         return { notFound: true }
